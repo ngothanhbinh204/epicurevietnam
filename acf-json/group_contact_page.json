@@ -1,0 +1,169 @@
+{
+    "key": "group_contact_page",
+    "title": "Contact Page",
+    "fields": [
+        {
+            "key": "field_contact_sections",
+            "label": "Contact Sections",
+            "name": "contact_sections",
+            "type": "flexible_content",
+            "layouts": {
+                "layout_contact_banner": {
+                    "key": "layout_contact_banner",
+                    "name": "banner",
+                    "label": "Banner Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_contact_banner_image",
+                            "label": "Banner Image",
+                            "name": "banner_image",
+                            "type": "image",
+                            "return_format": "array"
+                        },
+                        {
+                            "key": "field_contact_banner_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "layout_contact_content": {
+                    "key": "layout_contact_content",
+                    "name": "contact_content",
+                    "label": "Contact Content Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_contact_main_title",
+                            "label": "Main Title",
+                            "name": "main_title",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_contact_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_contact_social_links",
+                            "label": "Social Links",
+                            "name": "social_links",
+                            "type": "repeater",
+                            "layout": "table",
+                            "sub_fields": [
+                                {
+                                    "key": "field_contact_social_icon",
+                                    "label": "Icon Class",
+                                    "name": "icon",
+                                    "type": "text",
+                                    "instructions": "e.g., fab fa-facebook-f"
+                                },
+                                {
+                                    "key": "field_contact_social_url",
+                                    "label": "URL",
+                                    "name": "url",
+                                    "type": "url"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_contact_form_shortcode",
+                            "label": "Contact Form 7 Shortcode",
+                            "name": "form_shortcode",
+                            "type": "text",
+                            "instructions": "Enter Contact Form 7 shortcode, e.g., [contact-form-7 id=\"123\"]"
+                        },
+                        {
+                            "key": "field_contact_sidebar_title",
+                            "label": "Sidebar Title",
+                            "name": "sidebar_title",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_contact_info_items",
+                            "label": "Contact Information Items",
+                            "name": "contact_info_items",
+                            "type": "repeater",
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_contact_info_icon",
+                                    "label": "Icon Class",
+                                    "name": "icon",
+                                    "type": "text",
+                                    "instructions": "e.g., ri-map-pin-fill, ri-mail-fill"
+                                },
+                                {
+                                    "key": "field_contact_info_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "field_contact_info_content",
+                                    "label": "Content",
+                                    "name": "content",
+                                    "type": "wysiwyg",
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "layout_contact_map": {
+                    "key": "layout_contact_map",
+                    "name": "map",
+                    "label": "Google Map Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_contact_map_iframe",
+                            "label": "Google Map Embed Code",
+                            "name": "map_iframe",
+                            "type": "textarea",
+                            "instructions": "Paste Google Maps embed iframe code"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "templates/page-contact.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "revisions",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "featured_image",
+        "categories",
+        "tags"
+    ],
+    "active": true,
+    "description": "ACF fields for Contact page"
+}

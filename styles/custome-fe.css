@@ -1,0 +1,270 @@
+
+.banner-child .image:before,.banner-child .image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.banner-child.hidden-backdrop .image:before {
+    content: none;
+}
+.banner-child.hidden-backdrop .image img {
+    opacity: 1;
+}
+.banner-child.hidden-backdrop h1 {
+    display: none;
+}
+.form-search {
+    width: 100%;
+}
+.home-slide.main-section.news-speed .container .main-title:first-child {
+    margin-top: 0px;
+}
+
+/* Custom Contact Form 7 */
+
+.custom-contact-form {
+    max-width: 100%;
+}
+
+.custom-contact-form .form-row {
+    margin-bottom: 20px;
+}
+
+.custom-contact-form .form-group {
+    position: relative;
+    display: flex;
+}
+
+.custom-contact-form label {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.custom-contact-form .wpcf7-form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    height: 50px;
+    color: rgb(102, 102, 102);
+    font-size: 16px;
+    font-weight: 400;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-image: initial;
+    background: rgb(250, 250, 250);
+    padding: 5px 20px;
+}
+
+.custom-contact-form .wpcf7-form-control.wpcf7-select {
+    height: 50px;
+    color: rgb(102, 102, 102);
+    font-size: 16px;
+    font-weight: 400;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(225, 225, 225);
+    border-image: initial;
+    background: rgb(250, 250, 250);
+    padding: 5px 20px;
+}
+.custom-contact-form .wpcf7-form-control:focus {
+    outline: none;
+    border-color: #007cba;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
+}
+
+.custom-contact-form select.wpcf7-form-control {
+    height: 45px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='m2 0-2 2h4zm0 5 2-2h-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.custom-contact-form textarea.wpcf7-form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.custom-contact-form .btn-submit {
+    background-color: #3b4897;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.custom-contact-form .btn-submit:hover {
+    background-color: #2d3671;
+    transform: translateY(-1px);
+}
+.wpcf7-form-control-wrap {
+    flex-grow: 1;
+}
+/* Error styling */
+.custom-contact-form .wpcf7-not-valid {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5 !important;
+}
+
+.custom-contact-form .wpcf7-validation-errors {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.custom-contact-form .wpcf7-mail-sent-ok {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+/* CAPTCHA Styling */
+.custom-contact-form .captcha-group {
+    align-items: flex-start;
+}
+
+.custom-contact-form .captcha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.custom-contact-form .wpcf7-captcha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-contact-form .wpcf7-captcha img {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.custom-contact-form .wpcf7-captchac {
+    max-width: 120px;
+}
+
+/* reCAPTCHA styling */
+.custom-contact-form .g-recaptcha {
+    margin: 10px 0;
+}
+
+/* Math CAPTCHA styling */
+.custom-contact-form .wpcf7-quiz {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+@media (min-width:576px) {
+    .custom-contact-form .form-group label{
+        margin-top: 5px;
+        padding-right: 5px;
+        width: 155px;
+    }
+    
+    .custom-contact-form .captcha-group label {
+        margin-top: 10px;
+    }
+}
+/* Responsive */
+@media (max-width: 768px) {
+    
+    .custom-contact-form .wpcf7-form-control {
+        padding: 10px 12px;
+    }
+}
+
+
+footer .footer-top .main-news-letter .subscribe{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -ms-flex-wrap: wrap;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 350px;
+}
+footer .footer-top .main-news-letter .wpcf7 input {
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 5px 20px;
+    /* width: calc(100% - 105px); */
+    width: 100%;
+    height: 40px;
+    color: #999;
+    font-size: 14px;
+}
+footer .footer-top .main-news-letter .wpcf7 .subscribebutton {
+        -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+    border: 1px solid #272774;
+    background: #272774;
+    width: 105px;
+    height: 40px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    &:hover {
+        border-color: #c4000a;
+        background: #c4000a;
+        color: #fff;
+    }
+}

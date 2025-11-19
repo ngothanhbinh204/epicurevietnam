@@ -1,0 +1,682 @@
+{
+	"key": "group_home",
+	"title": "Home Page",
+	"fields": [
+		{
+			"key": "field_home_sections",
+			"label": "Home Sections",
+			"name": "home_sections",
+			"type": "flexible_content",
+			"layouts": {
+				"layout_hero_slider": {
+					"key": "layout_hero_slider",
+					"name": "hero_slider",
+					"label": "Hero Slider",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_hero_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text",
+							"default_value": "highlights"
+						},
+						{
+							"key": "field_hero_featured_posts",
+							"label": "Featured Posts",
+							"name": "featured_posts",
+							"type": "relationship",
+							"instructions": "Select featured posts to display in slider",
+							"post_type": [
+								"post",
+								"trai_nghiem",
+								"video",
+								"mua_sam",
+								"events",
+								"vouchers"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 1,
+							"max": 10,
+							"return_format": "object"
+						}
+					]
+				},
+				"layout_whats_on": {
+					"key": "layout_whats_on",
+					"name": "whats_on",
+					"label": "What's On Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_whats_on_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_whats_on_experience_category",
+							"label": "Experience Category",
+							"name": "experience_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter experiences",
+							"taxonomy": "trai_nghiem_category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_whats_on_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select categories to display in menu",
+							"taxonomy": "trai_nghiem_category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_whats_on_featured_experience",
+							"label": "Featured Experience",
+							"name": "featured_experience",
+							"type": "relationship",
+							"instructions": "Select featured experience post",
+							"post_type": [
+								"trai_nghiem"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 1,
+							"max": 1,
+							"return_format": "object"
+						},
+						{
+							"key": "field_whats_on_experiences",
+							"label": "Experience Posts",
+							"name": "experience_posts",
+							"type": "relationship",
+							"instructions": "Select experience posts to display",
+							"post_type": [
+								"trai_nghiem"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 1,
+							"max": 8,
+							"return_format": "object"
+						},
+						{
+							"key": "field_whats_on_sidebar_title",
+							"label": "Sidebar Title",
+							"name": "sidebar_title",
+							"type": "text"
+						},
+						{
+							"key": "field_whats_on_sidebar_banners",
+							"label": "Sidebar Banners",
+							"name": "sidebar_banners",
+							"type": "repeater",
+							"sub_fields": [
+								{
+									"key": "field_whats_on_banner_image",
+									"label": "Banner Image",
+									"name": "image",
+									"type": "image"
+								},
+								{
+									"key": "field_whats_on_banner_link",
+									"label": "Banner Link",
+									"name": "link",
+									"type": "link"
+								}
+							]
+						}
+					]
+				},
+				"layout_banner_full": {
+					"key": "layout_banner_full",
+					"name": "banner_full",
+					"label": "Full Width Banner",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_banner_image",
+							"label": "Banner Image",
+							"name": "image",
+							"type": "image"
+						},
+						{
+							"key": "field_banner_link",
+							"label": "Banner Link",
+							"name": "link",
+							"type": "link"
+						}
+					]
+				},
+				"layout_video_section": {
+					"key": "layout_video_section",
+					"name": "video_section",
+					"label": "Video Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_video_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_video_category",
+							"label": "Video Category",
+							"name": "video_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter videos",
+							"taxonomy": "video_category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_video_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select video categories to display in menu",
+							"taxonomy": "video_category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_video_view_all_link",
+							"label": "View All Link",
+							"name": "view_all_link",
+							"type": "link"
+						},
+						{
+							"key": "field_video_featured",
+							"label": "Featured Video",
+							"name": "featured_video",
+							"type": "relationship",
+							"instructions": "Select featured video post",
+							"post_type": [
+								"video"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 1,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_video_main",
+							"label": "Main Video",
+							"name": "main_video",
+							"type": "relationship",
+							"instructions": "Select main video post",
+							"post_type": [
+								"video"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 1,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_video_list",
+							"label": "Video List",
+							"name": "video_list",
+							"type": "relationship",
+							"instructions": "Select video posts to display",
+							"post_type": [
+								"video"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 6,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						}
+					]
+				},
+				"layout_chef_masterclass": {
+					"key": "layout_chef_masterclass",
+					"name": "chef_masterclass",
+					"label": "Chef Masterclass Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_chef_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_chef_category",
+							"label": "Post Category",
+							"name": "post_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter posts",
+							"taxonomy": "category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_chef_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select categories to display in menu",
+							"taxonomy": "category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_chef_articles",
+							"label": "Articles",
+							"name": "articles",
+							"type": "relationship",
+							"instructions": "Select posts to display",
+							"post_type": [
+								"post"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 6,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						}
+					]
+				},
+				"layout_wine_cellar": {
+					"key": "layout_wine_cellar",
+					"name": "wine_cellar",
+					"label": "Wine Cellar Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_wine_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_wine_category",
+							"label": "Post Category",
+							"name": "post_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter posts",
+							"taxonomy": "category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_wine_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select categories to display in menu",
+							"taxonomy": "category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_wine_articles",
+							"label": "Articles",
+							"name": "articles",
+							"type": "relationship",
+							"instructions": "Select posts to display",
+							"post_type": [
+								"post"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 6,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_wine_sidebar_banners",
+							"label": "Sidebar Banners",
+							"name": "sidebar_banners",
+							"type": "repeater",
+							"sub_fields": [
+								{
+									"key": "field_wine_banner_image",
+									"label": "Banner Image",
+									"name": "image",
+									"type": "image"
+								},
+								{
+									"key": "field_wine_banner_link",
+									"label": "Banner Link",
+									"name": "link",
+									"type": "link"
+								}
+							]
+						}
+					]
+				},
+				"layout_gourmet_traveller": {
+					"key": "layout_gourmet_traveller",
+					"name": "gourmet_traveller",
+					"label": "Gourmet Traveller Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_gourmet_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_gourmet_category",
+							"label": "Post Category",
+							"name": "post_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter posts",
+							"taxonomy": "category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_gourmet_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select categories to display in menu",
+							"taxonomy": "category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_gourmet_featured_article",
+							"label": "Featured Article",
+							"name": "featured_article",
+							"type": "relationship",
+							"instructions": "Select featured post",
+							"post_type": [
+								"post"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 1,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_gourmet_articles",
+							"label": "Articles",
+							"name": "articles",
+							"type": "relationship",
+							"instructions": "Select posts to display",
+							"post_type": [
+								"post"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 6,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_gourmet_sidebar_banners",
+							"label": "Sidebar Banners",
+							"name": "sidebar_banners",
+							"type": "repeater",
+							"sub_fields": [
+								{
+									"key": "field_gourmet_banner_image",
+									"label": "Banner Image",
+									"name": "image",
+									"type": "image"
+								},
+								{
+									"key": "field_gourmet_banner_link",
+									"label": "Banner Link",
+									"name": "link",
+									"type": "link"
+								}
+							]
+						}
+					]
+				},
+				"layout_events": {
+					"key": "layout_events",
+					"name": "events",
+					"label": "Events Section",
+					"display": "block",
+					"sub_fields": [
+						{
+							"key": "field_events_title",
+							"label": "Title",
+							"name": "title",
+							"type": "text"
+						},
+						{
+							"key": "field_events_category",
+							"label": "Event Category",
+							"name": "event_category",
+							"type": "taxonomy",
+							"instructions": "Select category to filter events",
+							"taxonomy": "events_category",
+							"field_type": "select",
+							"allow_null": 1,
+							"multiple": 0,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_events_menu_categories",
+							"label": "Menu Categories",
+							"name": "menu_categories",
+							"type": "taxonomy",
+							"instructions": "Select event categories to display in menu",
+							"taxonomy": "events_category",
+							"field_type": "multi_select",
+							"allow_null": 1,
+							"multiple": 1,
+							"add_term": 0,
+							"save_terms": 0,
+							"load_terms": 0,
+							"return_format": "object"
+						},
+						{
+							"key": "field_events_articles",
+							"label": "Events",
+							"name": "events",
+							"type": "relationship",
+							"instructions": "Select events to display",
+							"post_type": [
+								"events"
+							],
+							"taxonomy": [],
+							"filters": [
+								"search",
+								"taxonomy"
+							],
+							"elements": [
+								"featured_image"
+							],
+							"min": 0,
+							"max": 6,
+							"return_format": "object",
+							"add_term": 1,
+							"load_post": 0,
+							"save_post": 0
+						},
+						{
+							"key": "field_events_sidebar_banners",
+							"label": "Sidebar Banners",
+							"name": "sidebar_banners",
+							"type": "repeater",
+							"sub_fields": [
+								{
+									"key": "field_events_banner_image",
+									"label": "Banner Image",
+									"name": "image",
+									"type": "image"
+								},
+								{
+									"key": "field_events_banner_link",
+									"label": "Banner Link",
+									"name": "link",
+									"type": "link"
+								}
+							]
+						}
+					]
+				}
+			}
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "page_template",
+				"operator": "==",
+				"value": "template-home.php"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": ""
+}
