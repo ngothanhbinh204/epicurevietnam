@@ -23,6 +23,46 @@
     margin-top: 0px;
 }
 
+/* Hide WPML breadcrumbs - AGGRESSIVE */
+.breadcrumb-item:has(a[href*="translation_priority"]),
+.breadcrumb-item a[href*="translation_priority"],
+.breadcrumb-item a[href*="optional"],
+.breadcrumb-item:contains("OPTIONAL"),
+.breadcrumb-item:contains("optional"),
+.breadcrumb-item:contains("NORMAL"),
+.breadcrumb-item:contains("HIGH") {
+    display: none !important;
+}
+
+/* Hide any breadcrumb item containing WPML terms - ENHANCED */
+.main-breadcrumb .breadcrumb li:contains("optional"),
+.main-breadcrumb .breadcrumb li:contains("OPTIONAL"),
+.main-breadcrumb .breadcrumb li:contains("normal"),
+.main-breadcrumb .breadcrumb li:contains("high"),
+.main-breadcrumb .breadcrumb li a[href*="translation_priority"],
+.main-breadcrumb .breadcrumb li a[href*="optional"],
+.breadcrumb li:nth-child(n) {
+    /* Check each breadcrumb item */
+}
+
+.main-breadcrumb .breadcrumb li a[href*="translation_priority"],
+.main-breadcrumb .breadcrumb li a[href*="optional"],
+.main-breadcrumb .breadcrumb li a[href*="wpml"] {
+    display: none !important;
+}
+
+/* Hide parent li if it contains WPML links */
+.main-breadcrumb .breadcrumb li:has(a[href*="translation_priority"]),
+.main-breadcrumb .breadcrumb li:has(a[href*="optional"]) {
+    display: none !important;
+}
+
+/* Fallback - hide by text content using JavaScript targeting */
+.wpml-breadcrumb-hidden,
+[data-wpml="hidden"] {
+    display: none !important;
+}
+
 /* Custom Contact Form 7 */
 
 .custom-contact-form {
@@ -47,7 +87,7 @@
     line-height: 1.4;
 }
 
-.custom-contact-form .wpcf7-form-control {
+.custom-contact-form .wpcf7-form-control.form-control  {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #e5e5e5;
