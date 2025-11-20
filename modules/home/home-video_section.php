@@ -7,7 +7,7 @@ $featured_video = get_sub_field('featured_video');
 $main_video = get_sub_field('main_video');
 $video_list = get_sub_field('video_list');
 
-if (!$title) return; // Exit if no content
+if (!$title) return; 
 ?>
 
 <section class="news-video">
@@ -54,7 +54,6 @@ if (!$title) return; // Exit if no content
 					$post = $main_video[0]; 
 					setup_postdata($post);
 					$video_url = get_field('video_url', $post->ID);
-					// Get image: prioritize default thumbnail, fallback to custom field
 					$video_image = '';
 					if (has_post_thumbnail($post->ID)) {
 						$video_image = get_image_post($post->ID);
@@ -67,7 +66,7 @@ if (!$title) return; // Exit if no content
 				?>
                 <div class="news-item news-item-video news-item-video-big">
                     <div class="image">
-                        <a href="<?= $video_url ? $video_url : get_permalink() ?>">
+                        <a href="<?= get_permalink() ?>">
                             <?php if ($video_image): ?>
                             <?= $video_image ?>
                             <?php endif; ?>
@@ -84,7 +83,6 @@ if (!$title) return; // Exit if no content
                     <?php foreach ($video_list as $post) : 
 							setup_postdata($post);
 							$video_url = get_field('video_url', $post->ID);
-							// Get image: prioritize default thumbnail, fallback to custom field
 							$list_video_image = '';
 							if (has_post_thumbnail($post->ID)) {
 								$list_video_image = get_image_post($post->ID);
@@ -97,7 +95,7 @@ if (!$title) return; // Exit if no content
 						?>
                     <div class="col-md-6 col-lg-12 news-item news-item-child news-item-video">
                         <div class="image">
-                            <a href="<?= $video_url ? $video_url : get_permalink() ?>">
+                            <a href="<?= get_permalink() ?>">
                                 <?php if ($list_video_image): ?>
                                 <?= $list_video_image ?>
                                 <?php endif; ?>
@@ -105,8 +103,7 @@ if (!$title) return; // Exit if no content
                             </a>
                         </div>
                         <div class="caption">
-                            <a class="title"
-                                href="<?= $video_url ? $video_url : get_permalink() ?>"><?= get_the_title() ?></a>
+                            <a class="title" href="<?= get_permalink() ?>"><?= get_the_title() ?></a>
                         </div>
                     </div>
                     <?php endforeach; ?>

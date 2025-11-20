@@ -175,11 +175,31 @@ function wpml_fix_custom_permalink_structure($permalink, $post, $leavename) {
     $post_types = array('experiences', 'shopping', 'events', 'vouchers');
     
     if (in_array($post->post_type, $post_types)) {
+        $post_lang = apply_filters('wpml_element_language_code', null, array('element_id' => $post->ID, 'element_type' => 'post_' . $post->post_type));
         $current_lang = get_current_language();
         
-        if ($current_lang !== 'vi') {
-            // Add language prefix for non-default language
-            $permalink = str_replace(home_url('/'), home_url('/' . $current_lang . '/'), $permalink);
+        if ($post_lang && $post_lang !== $current_lang) {
+            $default_lang = apply_filters('wpml_default_language', NULL);
+            
+            // Current base
+            $current_base = home_url('/');
+            
+            // Root base (without language)
+            $root = $current_base;
+            if ($current_lang !== $default_lang) {
+                $root = str_replace('/' . $current_lang . '/', '/', $current_base);
+            }
+            
+            // Target base
+            $target_base = $root;
+            if ($post_lang !== $default_lang) {
+                $target_base = $root . $post_lang . '/';
+            }
+            
+            // Replace current base with target base in permalink
+            if (strpos($permalink, $current_base) === 0) {
+                $permalink = substr_replace($permalink, $target_base, 0, strlen($current_base));
+            }
         }
     }
     

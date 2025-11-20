@@ -11,7 +11,7 @@ if (!empty($taxonomies)) :
         if (in_array($taxonomy->name, ['post_tag', 'post_format'])) continue;
         
         // Skip tag taxonomies to avoid duplicate breadcrumbs
-        $tag_taxonomies = ['experiences_tag', 'shopping_tag', 'events_tag', 'vouchers_tag'];
+        $tag_taxonomies = ['experiences_tag', 'shopping_tag', 'events_tag', 'vouchers_tag', 'translation_priority'];
         if (in_array($taxonomy->name, $tag_taxonomies)) continue;
         
         // Get terms for this taxonomy

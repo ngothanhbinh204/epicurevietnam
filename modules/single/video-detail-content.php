@@ -1,6 +1,12 @@
 <?php
 $post_id = get_the_ID();
 $video_url = get_field('video_url', $post_id);
+
+// Support YouTube Shorts
+if ($video_url && strpos($video_url, '/shorts/') !== false) {
+    $video_url = str_replace('/shorts/', '/watch?v=', $video_url);
+}
+
 // Get image: prioritize default thumbnail, fallback to custom field
 $thumbnail_image = '';
 if (has_post_thumbnail($post_id)) {
@@ -78,8 +84,7 @@ endif;
 ?>
 
 <div class="news-video-other">
-    <h2 class="main-title">Other video</h2>
-
+    <h2 class="main-title"><?php echo esc_html__('Other video', 'canhcamtheme'); ?></h2>
     <div class="main-slide">
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -98,6 +103,12 @@ endif;
                 if ($related_query->have_posts()) :
                     while ($related_query->have_posts()) : $related_query->the_post();
                         $related_video_url = get_field('video_url', get_the_ID());
+                        
+                        // Support YouTube Shorts
+                        if ($related_video_url && strpos($related_video_url, '/shorts/') !== false) {
+                            $related_video_url = str_replace('/shorts/', '/watch?v=', $related_video_url);
+                        }
+
                         // Get image: prioritize default thumbnail, fallback to custom field
                         $related_video_image = '';
                         if (has_post_thumbnail(get_the_ID())) {
