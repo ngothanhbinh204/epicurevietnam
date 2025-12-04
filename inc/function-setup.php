@@ -285,40 +285,40 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	}
 	
 	// For single posts, remove the post title and stop at category
-	if (is_single()) {
-		$post_type = get_post_type();
-		$custom_post_types = ['experiences', 'shopping', 'events', 'vouchers'];
+	// if (is_single()) {
+	// 	$post_type = get_post_type();
+	// 	$custom_post_types = ['experiences', 'shopping', 'events', 'vouchers'];
 		
-		if (in_array($post_type, $custom_post_types)) {
-			// Get the post categories/terms
-			$taxonomy_map = [
-				'experiences' => 'experiences_category',
-				'shopping' => 'shopping_category', 
-				'events' => 'events_category',
-				'vouchers' => 'vouchers_category'
-			];
+	// 	if (in_array($post_type, $custom_post_types)) {
+	// 		// Get the post categories/terms
+	// 		$taxonomy_map = [
+	// 			'experiences' => 'experiences_category',
+	// 			'shopping' => 'shopping_category', 
+	// 			'events' => 'events_category',
+	// 			'vouchers' => 'vouchers_category'
+	// 		];
 			
-			if (isset($taxonomy_map[$post_type])) {
-				$taxonomy = $taxonomy_map[$post_type];
-				$terms = get_the_terms(get_the_ID(), $taxonomy);
+	// 		if (isset($taxonomy_map[$post_type])) {
+	// 			$taxonomy = $taxonomy_map[$post_type];
+	// 			$terms = get_the_terms(get_the_ID(), $taxonomy);
 				
-				if ($terms && !is_wp_error($terms)) {
-					$primary_term = $terms[0]; // Get the first/primary term
+	// 			if ($terms && !is_wp_error($terms)) {
+	// 				$primary_term = $terms[0]; // Get the first/primary term
 					
-					// Remove the last item (post title) if exists
-					if (count($crumbs) > 1) {
-						array_pop($crumbs);
-					}
+	// 				// Remove the last item (post title) if exists
+	// 				if (count($crumbs) > 1) {
+	// 					array_pop($crumbs);
+	// 				}
 					
-					// Add the category as the last breadcrumb item
-					$crumbs[] = [
-						$primary_term->name,
-						get_term_link($primary_term)
-					];
-				}
-			}
-		}
-	}
+	// 				// Add the category as the last breadcrumb item
+	// 				$crumbs[] = [
+	// 					$primary_term->name,
+	// 					get_term_link($primary_term)
+	// 				];
+	// 			}
+	// 		}
+	// 	}
+	// }
 	
 	// Remove breadcrumbs for tag pages to avoid duplication
 	if (is_tax()) {

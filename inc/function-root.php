@@ -515,7 +515,7 @@ function get_image_attachment($image, $type = "image")
 			$alt = get_post_meta($image_id, '_wp_attachment_image_alt', true) != '' ? get_post_meta($image_id, '_wp_attachment_image_alt', true) : get_bloginfo('name');
 			$url = wp_get_attachment_image($image_id, 'full', '', array('class' => '1', 'alt' => $alt, 'title' => $alt));
 			return changeAttrImage($url);
-		}
+		}	
 	}
 	if ($type == "url") {
 		if ($image_id) {
@@ -538,6 +538,48 @@ function get_image_post($id, $type = "image")
 		return $url;
 	}
 }
+
+function get_video_thumbnail($post_id) {
+    if (has_post_thumbnail($post_id)) {
+        return get_image_post($post_id); 
+    }
+    $default = get_template_directory_uri() . '/assets/images/placeholder-video.jpg';
+
+    return '
+        <img class="lazyload"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            data-src="'. $default .'"
+            alt="Video Thumbnail"
+        />
+    ';
+}
+function normalize_youtube_url($url) {
+    if (!$url) return '';
+
+    // Chuyển Shorts → watch?v=
+    if (strpos($url, '/shorts/') !== false) {
+        return str_replace('/shorts/', '/watch?v=', $url);
+    }
+
+    return $url;
+}
+
+function get_video_thumbnail_image($post_id) {
+    if (has_post_thumbnail($post_id)) {
+        return get_image_post($post_id);
+    }
+
+    $fallback = get_template_directory_uri() . '/assets/images/placeholder-video.jpg';
+
+    return '
+        <img class="lazyload" 
+             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+             data-src="' . $fallback . '" 
+             alt="Video Thumbnail" />
+    ';
+}
+
+
 
 // Alias function để tương thích ngược
 function get_image_attrachment($image, $type = "image") {

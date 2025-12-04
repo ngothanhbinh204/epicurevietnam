@@ -33,17 +33,10 @@ if (!$title || !$featured_posts) return; // Exit if no content
 							// Get image based on post type
 							$post_image = '';
 							if ($is_video) {
-								// For videos: prioritize thumbnail, fallback to video_background_image field
 								if (has_post_thumbnail($post_id)) {
 									$post_image = get_image_post($post_id);
-								} else {
-									$video_background_image = get_field('video_background_image', $post_id);
-									if ($video_background_image) {
-										$post_image = get_image_attachment($video_background_image);
-									}
 								}
 							} else {
-								// For other post types: use thumbnail
 								if (has_post_thumbnail($post_id)) {
 									$post_image = get_image_post($post_id);
 								}

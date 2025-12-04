@@ -37,9 +37,8 @@ if (!$title) return; // Exit if no content
                             <div class="news-item">
                                 <div class="image">
                                     <a href="<?= get_permalink() ?>">
-                                        <img class="lazyload"
-                                            data-src="<?= get_the_post_thumbnail_url($post, 'medium_large') ?>"
-                                            alt="<?= get_the_title() ?>">
+
+                                        <?php echo get_image_post(get_the_ID()); ?>
                                     </a>
                                 </div>
                                 <div class="caption">
@@ -60,9 +59,7 @@ if (!$title) return; // Exit if no content
                                 <div class="news-item col-md-6 col-lg-12 news-item-child">
                                     <div class="image">
                                         <a href="<?= get_permalink() ?>">
-                                            <img class="lazyload"
-                                                data-src="<?= get_the_post_thumbnail_url($post, 'medium') ?>"
-                                                alt="<?= get_the_title() ?>">
+                                            <?php echo get_image_post(get_the_ID()); ?>
                                         </a>
                                     </div>
                                     <div class="caption">
@@ -83,8 +80,7 @@ if (!$title) return; // Exit if no content
                         <?php foreach ($sidebar_banners as $banner) : ?>
                         <div class="banner-item">
                             <a href="<?= $banner['link']['url'] ?>">
-                                <img class="lazyload" data-src="<?= get_image_attrachment($banner['image'], 'url') ?>"
-                                    alt="">
+                                <?= get_image_attachment($banner['image'], 'image'); ?>
                             </a>
                         </div>
                         <?php endforeach; ?>

@@ -43,7 +43,6 @@ function get_video_url($post_id = null) {
             // Display main video (left caption)
             if ($main_post) :
                 $video_url = get_field('video_url', $main_post->ID);
-                $video_thumbnail = get_field('video_background_image', $main_post->ID);
             ?>
             <div class="col-lg-3">
                 <div class="news-item news-item-video news-item-video-big">
@@ -64,9 +63,7 @@ function get_video_url($post_id = null) {
                 <div class="news-item news-item-video news-item-video-big">
                     <div class="image">
                         <a href="<?= get_permalink($main_post->ID) ?>">
-                            <img class="lazyload"
-                                data-src="<?= $video_thumbnail ? wp_get_attachment_image_url($video_thumbnail, 'large') : get_the_post_thumbnail_url($main_post->ID, 'large') ?>"
-                                alt="<?= get_the_title($main_post->ID) ?>">
+                            <?php echo get_image_post($main_post->ID); ?>
                         </a>
                         <div class="icon-play">
                             <em class="mdi mdi-play-circle"></em>
@@ -82,14 +79,11 @@ function get_video_url($post_id = null) {
                     <?php 
                     foreach ($side_posts as $side_post) :
                         $video_url = get_field('video_url', $side_post->ID);
-                        $video_thumbnail = get_field('video_background_image', $side_post->ID);
                     ?>
                     <div class="col-md-6 col-lg-12 news-item news-item-child news-item-video">
                         <div class="image">
                             <a href="<?= get_permalink($side_post->ID) ?>">
-                                <img class="lazyload"
-                                    data-src="<?= $video_thumbnail ? wp_get_attachment_image_url($video_thumbnail, 'medium') : get_the_post_thumbnail_url($side_post->ID, 'medium') ?>"
-                                    alt="<?= get_the_title($side_post->ID) ?>">
+                                <?php echo get_image_post($side_post->ID); ?>
                             </a>
                             <div class="icon-play">
                                 <em class="mdi mdi-play-circle"></em>
@@ -108,7 +102,6 @@ function get_video_url($post_id = null) {
 </div>
 
 <?php
-// Get banner ads for middle section
 $banner_ads = get_field('video_middle_banner', 'option');
 
 if (!empty($banner_ads)) :
@@ -142,15 +135,12 @@ endif;
                     if ($count <= 5) continue;
                     
                     $video_url = get_field('video_url', get_the_ID());
-                    $video_thumbnail = get_field('video_background_image', get_the_ID());
             ?>
             <div class="col-sm-6 col-lg-4">
                 <div class="news-item news-item-video">
                     <div class="image">
                         <a href="<?= get_permalink() ?>">
-                            <img class="lazyload"
-                                data-src="<?= $video_thumbnail ? wp_get_attachment_image_url($video_thumbnail, 'medium') : get_the_post_thumbnail_url(get_the_ID(), 'medium') ?>"
-                                alt="<?= get_the_title() ?>">
+                            <?php echo get_image_post($main_post->ID); ?>
                         </a>
                         <div class="icon-play">
                             <em class="mdi mdi-play-circle"></em>

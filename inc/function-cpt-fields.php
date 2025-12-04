@@ -25,15 +25,6 @@ function add_video_fields()
                 'return_format' => 'id',
                 'mime_types' => 'mp4,mov,avi,wmv,flv,webm',
             ],
-            [
-                'key' => 'field_video_background_image',
-                'label' => 'Video Background/Thumbnail',
-                'name' => 'video_background_image',
-                'type' => 'image',
-                'instructions' => 'Background image or thumbnail for video',
-                'return_format' => 'id',
-                'preview_size' => 'medium',
-            ],
         ],
         'location' => [
             [

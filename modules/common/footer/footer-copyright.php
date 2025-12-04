@@ -4,5 +4,5 @@ if ($copyright_text) :
 	echo $copyright_text;
 else :
 ?>
-<p>Copyright <?= date('Y') ?> by Epicure Viet Nam. All right reserved. Designed by Canh Cam.</p>
+<p>Copyright <?= date('Y') ?> by NgocTraiHoangGia Viet Nam. All right reserved. Designed by Canh Cam.</p>
 <?php endif; ?>

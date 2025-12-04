@@ -11,7 +11,7 @@ if ($header_banner_image) :
 ?>
 <div class="image">
     <a href="<?= $header_banner_link['url'] ?? '#' ?>" <?= $header_banner_link['target'] ? 'target="_blank"' : '' ?>>
-        <?= get_image_attrachment($header_banner_image) ?>
+        <?= get_image_attrachment($header_banner_image, 'image') ?>
     </a>
 </div>
 <?php endif; ?>

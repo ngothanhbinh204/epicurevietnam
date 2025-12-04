@@ -28,7 +28,7 @@ if (is_tax() || is_category()) {
             <?php if ($thumbnail): ?>
             <div class="image">
                 <a href="<?= get_permalink() ?>">
-                    <?= changeAttrImage($thumbnail) ?>
+                    <?php echo get_image_post(get_the_ID()); ?>
                 </a>
             </div>
             <?php endif; ?>
@@ -90,7 +90,7 @@ endif;
                 <?php if ($thumbnail): ?>
                 <div class="image">
                     <a href="<?= get_permalink() ?>">
-                        <?= changeAttrImage($thumbnail) ?>
+                        <?php echo get_image_post(get_the_ID()); ?>
                     </a>
                 </div>
                 <?php endif; ?>

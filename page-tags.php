@@ -58,8 +58,7 @@ $tag_filter = isset($_GET['tags']) ? sanitize_text_field($_GET['tags']) : '';
                                 <?php if ($thumbnail_url): ?>
                                 <div class="image">
                                     <a href="<?= get_permalink() ?>" title="<?= get_the_title() ?>">
-                                        <img class="lazyload" data-src="<?= esc_url($thumbnail_url) ?>"
-                                            alt="<?= get_the_title() ?>">
+                                        <?php echo get_image_post(get_the_ID()); ?>
                                     </a>
                                 </div>
                                 <?php endif; ?>
@@ -139,8 +138,7 @@ $tag_filter = isset($_GET['tags']) ? sanitize_text_field($_GET['tags']) : '';
                                 <?php if ($thumbnail_url): ?>
                                 <div class="image">
                                     <a href="<?= get_permalink() ?>" title="<?= get_the_title() ?>">
-                                        <img class="lazyload" data-src="<?= esc_url($thumbnail_url) ?>"
-                                            alt="<?= get_the_title() ?>">
+                                        <?php echo get_image_post(get_the_ID()); ?>
                                     </a>
                                 </div>
                                 <?php endif; ?>

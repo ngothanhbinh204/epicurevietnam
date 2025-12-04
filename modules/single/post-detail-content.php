@@ -43,7 +43,8 @@ $website = get_field('website', $post_id);
         <div class="tags">
             <p>Tags:</p>
             <?php foreach ($post_tags as $tag) : ?>
-            <a href="<?= home_url('/tag?tags=' . urlencode($tag->name)) ?>" title="<?= esc_attr($tag->name) ?>"><?= esc_html($tag->name) ?></a>
+            <a href="<?= home_url('/tag?tags=' . urlencode($tag->name)) ?>"
+                title="<?= esc_attr($tag->name) ?>"><?= esc_html($tag->name) ?></a>
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
@@ -56,7 +57,7 @@ $website = get_field('website', $post_id);
                 <li>
                     <p class="title">
                         <em class="ri-map-pin-fill"></em>
-                        <span>Address</span>
+                        <span><?php echo esc_html__('Address', 'canhcamtheme'); ?></span>
                     </p>
                     <p class="content"><?= esc_html($address) ?></p>
                 </li>
@@ -66,7 +67,7 @@ $website = get_field('website', $post_id);
                 <li>
                     <p class="title">
                         <em class="ri-mail-fill"></em>
-                        <span>Email</span>
+                        <span><?php echo esc_html__('Email', 'canhcamtheme'); ?></span>
                     </p>
                     <p class="content">
                         <a href="mailto:<?= esc_attr($email) ?>"><?= esc_html($email) ?></a>
@@ -78,7 +79,7 @@ $website = get_field('website', $post_id);
                 <li>
                     <p class="title">
                         <em class="ri-phone-fill"></em>
-                        <span>Phone</span>
+                        <span><?php echo esc_html__('Phone', 'canhcamtheme'); ?></span>
                     </p>
                     <p class="content">
                         <?php
@@ -97,7 +98,7 @@ $website = get_field('website', $post_id);
                 <li>
                     <p class="title">
                         <em class="ri-smartphone-fill"></em>
-                        <span>Fax</span>
+                        <span><?php echo esc_html__('Fax', 'canhcamtheme'); ?></span>
                     </p>
                     <p class="content">
                         <a href="tel:<?= esc_attr(str_replace([' ', '.', '-'], '', $fax)) ?>"><?= esc_html($fax) ?></a>
@@ -109,7 +110,7 @@ $website = get_field('website', $post_id);
                 <li>
                     <p class="title">
                         <em class="ri-global-fill"></em>
-                        <span>Website</span>
+                        <span><?php echo esc_html__('Website', 'canhcamtheme'); ?></span>
                     </p>
                     <p class="content">
                         <a href="<?= esc_url($website) ?>"
@@ -122,8 +123,7 @@ $website = get_field('website', $post_id);
         <?php endif; ?>
 
         <div class="box-related">
-            <h2 class="main-title font-2 no-up">Related</h2>
-
+            <h2 class="main-title font-2 no-up"><?php echo esc_html__('Related', 'canhcamtheme'); ?></h2>
             <div class="main-slide">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
@@ -160,8 +160,7 @@ $website = get_field('website', $post_id);
                                 <?php if ($related_thumbnail_url): ?>
                                 <div class="image">
                                     <a href="<?= get_permalink() ?>">
-                                        <img class="lazyload" data-src="<?= esc_url($related_thumbnail_url) ?>"
-                                            alt="<?= get_the_title() ?>">
+                                        <?php echo get_image_post(get_the_ID()); ?>
                                     </a>
                                 </div>
                                 <?php endif; ?>
@@ -241,8 +240,7 @@ $website = get_field('website', $post_id);
                 <?php if ($great_thumbnail_url): ?>
                 <div class="image">
                     <a href="<?= get_permalink($great_post->ID) ?>">
-                        <img class="lazyload" data-src="<?= esc_url($great_thumbnail_url) ?>"
-                            alt="<?= get_the_title($great_post->ID) ?>">
+                        <?php echo get_image_post($great_post->ID); ?>
                     </a>
                 </div>
                 <?php endif; ?>

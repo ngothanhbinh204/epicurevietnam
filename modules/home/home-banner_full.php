@@ -8,9 +8,9 @@ if (!$image) return; // Exit if no content
 <section class="banner-full">
     <?php if ($link) : ?>
     <a href="<?= $link['url'] ?>">
-        <img class="lazyload" data-src="<?= get_image_attrachment($image, 'url') ?>" alt="">
+        <?= get_image_attachment($image, 'image'); ?>
     </a>
     <?php else : ?>
-    <img class="lazyload" data-src="<?= get_image_attrachment($image, 'url') ?>" alt="">
+    <?= get_image_attachment($image, 'image'); ?>
     <?php endif; ?>
 </section>

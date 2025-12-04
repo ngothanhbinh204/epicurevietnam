@@ -31,9 +31,7 @@ if (!$title) return;
                         <div class="news-item">
                             <div class="image">
                                 <a href="<?= get_permalink() ?>">
-                                    <img class="lazyload"
-                                        data-src="<?= get_the_post_thumbnail_url($post, 'medium_large') ?>"
-                                        alt="<?= get_the_title() ?>">
+                                    <?php echo get_image_post(get_the_ID()); ?>
                                 </a>
                             </div>
                             <div class="caption">
@@ -58,12 +56,12 @@ if (!$title) return;
                     <?php if (!empty($banner['link']) && !empty($banner['link']['url'])) : ?>
                     <a href="<?= esc_url($banner['link']['url']) ?>">
                         <?php if (!empty($banner['image'])) : ?>
-                        <img class="lazyload" data-src="<?= get_image_attrachment($banner['image'], 'url') ?>" alt="">
+                        <?= get_image_attachment($banner['image'], 'image'); ?>
                         <?php endif; ?>
                     </a>
                     <?php else : ?>
                     <?php if (!empty($banner['image'])) : ?>
-                    <img class="lazyload" data-src="<?= get_image_attrachment($banner['image'], 'url') ?>" alt="">
+                    <?= get_image_attachment($banner['image'], 'image'); ?>
                     <?php endif; ?>
                     <?php endif; ?>
                 </div>
