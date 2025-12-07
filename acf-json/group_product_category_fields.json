@@ -1,0 +1,96 @@
+{
+    "key": "group_product_category_fields",
+    "title": "Product Category Fields",
+    "fields": [
+        {
+            "key": "field_category_icon",
+            "label": "Icon danh mục",
+            "name": "category_icon",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload icon cho danh mục sản phẩm (khuyến nghị SVG hoặc PNG trong suốt)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg, jpeg, png, svg, webp",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_category_image",
+            "label": "Hình ảnh danh mục",
+            "name": "category_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Hình ảnh đại diện cho danh mục (hiển thị ở banner hoặc card)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg, jpeg, png, webp",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_category_description_short",
+            "label": "Mô tả ngắn",
+            "name": "category_description_short",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Mô tả ngắn cho danh mục (hiển thị ở trang sản phẩm)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": 200,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "product_category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for Product Category taxonomy",
+    "show_in_rest": 1,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1764867330
+}

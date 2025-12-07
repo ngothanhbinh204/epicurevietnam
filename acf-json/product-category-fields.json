@@ -1,0 +1,196 @@
+[
+    {
+        "key": "group_product_category_fields",
+        "title": "Product Category Fields",
+        "fields": [
+            {
+                "key": "field_category_icon",
+                "label": "Icon danh mục",
+                "name": "category_icon",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Upload icon cho danh mục sản phẩm (khuyến nghị SVG hoặc PNG trong suốt)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "jpg, jpeg, png, svg, webp",
+                "preview_size": "thumbnail"
+            },
+            {
+                "key": "field_category_image",
+                "label": "Hình ảnh danh mục",
+                "name": "category_image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Hình ảnh đại diện cho danh mục (hiển thị ở banner hoặc card)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "jpg, jpeg, png, webp",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_category_description_short",
+                "label": "Mô tả ngắn",
+                "name": "category_description_short",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "Mô tả ngắn cho danh mục (hiển thị ở trang sản phẩm)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": 200,
+                "rows": 3,
+                "placeholder": "",
+                "new_lines": "br"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "product_category"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Custom fields for Product Category taxonomy",
+        "show_in_rest": 1
+    },
+    {
+        "key": "group_product_attribute_fields",
+        "title": "Product Attribute Fields",
+        "fields": [
+            {
+                "key": "field_attribute_display_type",
+                "label": "Kiểu hiển thị",
+                "name": "attribute_display_type",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "Chọn kiểu hiển thị cho thuộc tính này trên bộ lọc",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "dropdown": "Dropdown",
+                    "checkbox": "Checkbox",
+                    "color": "Color Swatch",
+                    "button": "Button"
+                },
+                "default_value": "dropdown",
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_attribute_color_code",
+                "label": "Mã màu",
+                "name": "attribute_color_code",
+                "aria-label": "",
+                "type": "color_picker",
+                "instructions": "Chọn mã màu (chỉ dùng cho thuộc tính màu sắc)",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_attribute_display_type",
+                            "operator": "==",
+                            "value": "color"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_attribute_order",
+                "label": "Thứ tự hiển thị",
+                "name": "attribute_order",
+                "aria-label": "",
+                "type": "number",
+                "instructions": "Số nhỏ hơn sẽ hiển thị trước",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "min": 0,
+                "max": "",
+                "placeholder": "",
+                "step": 1,
+                "prepend": "",
+                "append": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "product_attribute"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Custom fields for Product Attribute taxonomy",
+        "show_in_rest": 1
+    }
+]

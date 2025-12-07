@@ -1,0 +1,104 @@
+{
+    "key": "group_product_attribute_fields",
+    "title": "Product Attribute Fields",
+    "fields": [
+        {
+            "key": "field_attribute_display_type",
+            "label": "Kiểu hiển thị",
+            "name": "attribute_display_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Chọn kiểu hiển thị cho thuộc tính này trên bộ lọc",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "dropdown": "Dropdown",
+                "checkbox": "Checkbox",
+                "color": "Color Swatch",
+                "button": "Button"
+            },
+            "default_value": "dropdown",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_attribute_color_code",
+            "label": "Mã màu",
+            "name": "attribute_color_code",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Chọn mã màu (chỉ dùng cho thuộc tính màu sắc)",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_attribute_display_type",
+                        "operator": "==",
+                        "value": "color"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_attribute_order",
+            "label": "Thứ tự hiển thị",
+            "name": "attribute_order",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Số nhỏ hơn sẽ hiển thị trước",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "min": 0,
+            "max": "",
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "product_attribute"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for Product Attribute taxonomy",
+    "show_in_rest": 1,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1764867330
+}

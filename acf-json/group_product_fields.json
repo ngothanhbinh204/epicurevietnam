@@ -1,0 +1,158 @@
+{
+    "key": "group_product_fields",
+    "title": "Product Fields",
+    "fields": [
+        {
+            "key": "field_product_price",
+            "label": "Giá bán",
+            "name": "product_price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Nhập giá bán sản phẩm (VNĐ)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "placeholder": "VD: 10381000",
+            "step": 1,
+            "prepend": "",
+            "append": "VNĐ"
+        },
+        {
+            "key": "field_product_old_price",
+            "label": "Giá gốc",
+            "name": "product_old_price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Nhập giá gốc (giá cũ) nếu có khuyến mãi",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "placeholder": "VD: 12381000",
+            "step": 1,
+            "prepend": "",
+            "append": "VNĐ"
+        },
+        {
+            "key": "field_product_sku",
+            "label": "Mã sản phẩm (SKU)",
+            "name": "product_sku",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Mã sản phẩm để quản lý",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "VD: 0000W001578",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_product_gallery",
+            "label": "Thư viện ảnh sản phẩm",
+            "name": "product_gallery",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Thêm nhiều ảnh cho sản phẩm",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min": 0,
+            "max": 10,
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg, jpeg, png, webp",
+            "insert": "append",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_product_is_featured",
+            "label": "Sản phẩm nổi bật",
+            "name": "product_is_featured",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Đánh dấu là sản phẩm nổi bật",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Có",
+            "ui_off_text": "Không"
+        },
+        {
+            "key": "field_product_is_new",
+            "label": "Sản phẩm mới",
+            "name": "product_is_new",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Đánh dấu là sản phẩm mới",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Có",
+            "ui_off_text": "Không"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for Product post type",
+    "show_in_rest": 1,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1764867322
+}

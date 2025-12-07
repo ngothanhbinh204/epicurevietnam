@@ -143,3 +143,61 @@ create_taxonomy('vouchers_category', [
 	'rewrite' => false, // Disable default rewrite, we'll handle it custom
 	'description' => 'Categorize vouchers by type'
 ]);
+
+// 6. Products
+create_post_type('product', [
+	'name' => 'Products',
+	'singular_name' => 'Product',
+	'slug' => 'products',
+	'icon' => 'dashicons-products',
+	'menu_position' => 10,
+	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+	'has_archive' => true,
+	'publicly_queryable' => true,
+	'show_in_rest' => true,
+	'rewrite' => [
+		'slug' => 'products',
+		'with_front' => false
+	],
+	'description' => 'Manage products'
+]);
+
+// Product Category (Main category with icon)
+create_taxonomy('product_category', [
+	'name' => 'Product Categories',
+	'singular_name' => 'Category',
+	'object_type' => ['product'],
+	'slug' => 'product-category',
+	'hierarchical' => true,
+	'show_in_rest' => true,
+	'rewrite' => [
+		'slug' => 'product-category',
+		'with_front' => false
+	],
+	'description' => 'Main product categories with icon'
+]);
+
+// Product Attributes (Hierarchical - Parent = Attribute Type, Child = Attribute Value)
+// Example structure:
+// - Gemstone Color (parent)
+//   - White (child)
+//   - Black (child)
+//   - Gold (child)
+// - Material (parent)
+//   - 10K Gold (child)
+//   - 18K Gold (child)
+create_taxonomy('product_attribute', [
+	'name' => 'Product Attributes',
+	'singular_name' => 'Attribute',
+	'object_type' => ['product'],
+	'slug' => 'product-attribute',
+	'hierarchical' => true,
+	'show_in_rest' => true,
+	'show_admin_column' => true,
+	'rewrite' => [
+		'slug' => 'product-attribute',
+		'with_front' => false,
+		'hierarchical' => true
+	],
+	'description' => 'Product attributes for filtering (Parent = Attribute Type, Children = Values)'
+]);
