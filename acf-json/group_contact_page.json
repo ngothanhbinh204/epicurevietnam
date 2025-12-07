@@ -62,7 +62,19 @@
                                     "label": "Icon Class",
                                     "name": "icon",
                                     "type": "text",
-                                    "instructions": "e.g., fab fa-facebook-f"
+                                    "instructions": "e.g., fab fa-facebook-f. Ưu tiên sử dụng nếu có.",
+                                    "required": 0
+                                },
+                                {
+                                    "key": "field_contact_social_icon_image",
+                                    "label": "Icon Image",
+                                    "name": "icon_image",
+                                    "type": "image",
+                                    "instructions": "Hình ảnh icon (sử dụng khi không có Icon Class)",
+                                    "return_format": "array",
+                                    "preview_size": "thumbnail",
+                                    "library": "all",
+                                    "required": 0
                                 },
                                 {
                                     "key": "field_contact_social_url",

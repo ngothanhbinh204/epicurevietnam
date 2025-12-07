@@ -13,6 +13,17 @@
 body {
     font-family: 'Arimo', sans-serif;
 }
+.om-contact .social-list li a img {
+    height: 1.5rem;
+}
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+footer .footer-top .social-list li a img {
+    height: 1.25rem;
+}
 .modulepager .pagination li.active a, .modulepager .pagination li.active span, .modulepager .pagination li:hover a, .modulepager .pagination li:hover span {
     background: var(--primary2-color);
     color: #fff;

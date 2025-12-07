@@ -281,7 +281,14 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 		} elseif ($crumb[0] === 'Voucher Categories') {
 			$crumb[0] = 'Vouchers';
 			$crumb[1] = get_post_type_archive_link('vouchers');
+		} elseif ($crumb[0] === 'Product Categories') {
+			$crumb[0] = 'Products';
+			$crumb[1] = get_post_type_archive_link('product');
+		} elseif ($crumb[0] === 'Video Categories') {
+			$crumb[0] = 'Videos';
+			$crumb[1] = get_post_type_archive_link('video');
 		}
+
 	}
 	
 	// For single posts, remove the post title and stop at category

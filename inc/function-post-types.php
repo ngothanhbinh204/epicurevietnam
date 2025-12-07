@@ -57,6 +57,19 @@ create_post_type('video', [
 	'description' => 'Quản lý video content'
 ]);
 
+// Category taxonomy for Video
+create_taxonomy('video_category', [
+	'name' => 'Video Categories',
+	'singular_name' => 'Category',
+	'object_type' => ['video'],
+	'slug' => 'video-category',
+	'hierarchical' => true,
+	'show_in_rest' => true,
+	'rewrite' => false, 
+	'description' => 'Categorize videos by type'
+]);
+
+
 // 3. Shopping
 create_post_type('shopping', [
 	'name' => 'Shopping',

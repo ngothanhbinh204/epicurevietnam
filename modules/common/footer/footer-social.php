@@ -4,11 +4,17 @@ if ($social_links) :
 ?>
 <ul class="social-list">
 	<?php foreach ($social_links as $social) :
-		if ($social['link'] && $social['icon']) :
+		// Check if link exists and either icon class or icon image is provided
+		$has_icon = !empty($social['icon']) || !empty($social['icon_image']);
+		if ($social['link'] && $has_icon) :
 	?>
 	<li>
 		<a href="<?= $social['link']['url'] ?>" <?= $social['link']['target'] ? 'target="_blank"' : '' ?>>
-			<em class="<?= $social['icon'] ?>"></em>
+			<?php if (!empty($social['icon'])) : ?>
+				<em class="<?= esc_attr($social['icon']) ?>"></em>
+			<?php elseif (!empty($social['icon_image'])) : ?>
+				<img src="<?= esc_url($social['icon_image']['url']) ?>" alt="<?= esc_attr($social['icon_image']['alt'] ?: 'Social icon') ?>" class="social-icon-img">
+			<?php endif; ?>
 		</a>
 	</li>
 	<?php 

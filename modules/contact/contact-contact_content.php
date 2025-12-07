@@ -20,13 +20,21 @@ $contact_info_items = get_sub_field('contact_info_items');
 
         <?php if (!empty($social_links)): ?>
         <ul class="social-list no-pad">
-            <?php foreach ($social_links as $social): ?>
+            <?php foreach ($social_links as $social): 
+                $has_icon = !empty($social['icon']) || !empty($social['icon_image']);
+                if (!empty($social['url']) && $has_icon):
+            ?>
             <li>
                 <a href="<?= esc_url($social['url']) ?>">
+                    <?php if (!empty($social['icon'])) : ?>
                     <em class="<?= esc_attr($social['icon']) ?>"></em>
+                    <?php elseif (!empty($social['icon_image'])) : ?>
+                    <img src="<?= esc_url($social['icon_image']['url']) ?>"
+                        alt="<?= esc_attr($social['icon_image']['alt'] ?: 'Social icon') ?>" class="social-icon-img">
+                    <?php endif; ?>
                 </a>
             </li>
-            <?php endforeach; ?>
+            <?php endif; endforeach; ?>
         </ul>
         <?php endif; ?>
 
