@@ -16,7 +16,7 @@ if ($paged == 1 && get_query_var('page')) {
 // Build query args
 $args = array(
     'post_type' => 'product',
-    'posts_per_page' => 4,
+    'posts_per_page' => 12,
     'paged' => $paged,
     'post_status' => 'publish',
     'orderby' => 'date',

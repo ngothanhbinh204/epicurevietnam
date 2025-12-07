@@ -50,7 +50,7 @@ $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '
 // Build query args
 $args = array(
 'post_type' => 'product',
-'posts_per_page' => 4,
+'posts_per_page' => 12,
 'paged' => $paged,
 'post_status' => 'publish'
 );

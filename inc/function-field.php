@@ -42,6 +42,7 @@ function add_field_select_banner()
 		'title' => 'Banner: Select Page',
 		'fields' => array(),
 		'location' => array(
+			// Pages
 			array(
 				array(
 					'param' => 'post_type',
@@ -49,14 +50,62 @@ function add_field_select_banner()
 					'value' => 'page',
 				),
 			),
-			// Thêm taxonomy ở dưới
-			// array(
-			// 	array(
-			// 		'param' => 'taxonomy',
-			// 		'operator' => '==',
-			// 		'value' => 'danh-muc-san-pham'
-			// 	)
-			// )
+			// Video Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'video_category',
+				),
+			),
+			// Shopping Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'shopping_category',
+				),
+			),
+			// Experiences Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'experiences_category',
+				),
+			),
+			// Events Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'events_category',
+				),
+			),
+			// Vouchers Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'vouchers_category',
+				),
+			),
+			// Product Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'product_category',
+				),
+			),
+			// Post Category
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'category',
+				),
+			),
 		),
 	));
 	acf_add_local_field(array(
@@ -377,20 +426,18 @@ function add_footer_settings_fields()
 						'label' => 'Icon Class',
 						'name' => 'icon',
 						'type' => 'text',
-						'instructions' => 'Nhập class icon (ví dụ: ri-facebook-fill). Ưu tiên sử dụng nếu có.',
+						'instructions' => 'Nhập class icon (ví dụ: ri-facebook-fill)',
 						'placeholder' => 'ri-facebook-fill',
-						'required' => 0,
 					),
 					array(
 						'key' => 'field_social_icon_image',
 						'label' => 'Icon Image',
 						'name' => 'icon_image',
 						'type' => 'image',
-						'instructions' => 'Hình ảnh icon (sử dụng khi không có Icon Class)',
+						'instructions' => 'Hoặc chọn ảnh icon thay vì sử dụng class',
 						'return_format' => 'array',
 						'preview_size' => 'thumbnail',
 						'library' => 'all',
-						'required' => 0,
 					),
 					array(
 						'key' => 'field_social_link',
