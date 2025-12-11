@@ -37,7 +37,6 @@
             <div class="container">
                 <div class="main-wrap">
                     <div class="left-wrap">
-                        <?php get_template_part('modules/common/header/header-logo', '', array('type' => 'main')); ?>
                         <?php get_template_part('modules/common/header/header-navigation'); ?>
                     </div>
                     <div class="right-wrap">

@@ -135,7 +135,7 @@ create_post_type('vouchers', [
 	'slug' => 'vouchers',
 	'icon' => 'dashicons-tickets-alt',
 	'menu_position' => 9,
-	'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'author'],
+	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'],
 	'has_archive' => true,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,

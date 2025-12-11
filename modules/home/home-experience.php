@@ -11,7 +11,7 @@ if (!$title) return; // Exit if no content
 ?>
 
 <section class="news-list-block-1 news-speed">
-    <div class="container">
+    <div class="">
         <div class="line-top"></div>
         <section class="news-list-block-1 news-speed">
             <div class="row">

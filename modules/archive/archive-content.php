@@ -109,12 +109,7 @@ endif;
             ?>
         </div>
 
-        <?php
-        // Pagination
-        if (function_exists('custom_pagination')) {
-            custom_pagination();
-        }
-        ?>
+
     </div>
 
     <div class="col-lg-4 col-xl-3">
@@ -128,18 +123,34 @@ endif;
         ?>
         <div class="banner-qc-list">
             <?php foreach ($sidebar_banners as $banner) :
-                if (!empty($banner['banner_image']) && !empty($banner['banner_link'])) :
-            ?>
+
+        // Lấy dữ liệu
+        $image = !empty($banner['banner_image']) ? $banner['banner_image'] : null;
+        $link  = !empty($banner['banner_link'])  ? $banner['banner_link']  : null;
+
+        if (!$image) {
+            continue;
+        }
+    ?>
             <div class="banner-item">
-                <a href="<?= esc_url($banner['banner_link']) ?>">
-                    <?= get_image_attrachment($banner['banner_image']) ?>
+                <?php if ($link) : ?>
+                <a href="<?= esc_url($link) ?>">
+                    <?= get_image_attrachment($image) ?>
                 </a>
+                <?php else : ?>
+                <?= get_image_attrachment($image) ?>
+                <?php endif; ?>
             </div>
-            <?php
-                endif;
-            endforeach;
-            ?>
+            <?php endforeach; ?>
         </div>
+
         <?php endif; ?>
     </div>
+
+    <?php
+        // Pagination
+        if (function_exists('custom_pagination')) {
+            custom_pagination();
+        }
+        ?>
 </div>

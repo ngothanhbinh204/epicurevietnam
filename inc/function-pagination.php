@@ -67,29 +67,21 @@ if ($count <= 1) return FALSE; if (!$page) $page=1; if ($count> $args['range']) 
 
 
             function custom_pagination($range = 4) {
-            // Truy cập biến toàn cục $wp_query
             global $wp_query;
 
-            // Kiểm tra nếu không có hoặc chỉ có 1 trang, thì không cần phân trang
-            if (!isset($wp_query->max_num_pages) || $wp_query->max_num_pages <= 1) { return; }
-                $paged=get_query_var('paged') ? absint(get_query_var('paged')) : 1; $max_pages=intval($wp_query->
-                max_num_pages);
+            if (!isset($wp_query->max_num_pages) || $wp_query->max_num_pages <= 1) return; $paged=get_query_var('paged')
+                ? absint(get_query_var('paged')) : 1; $max_pages=intval($wp_query->max_num_pages);
 
                 $start_page = max(1, $paged - floor($range / 2));
-
-                // Trang kết thúc trong phạm vi hiển thị
                 $end_page = min($max_pages, $start_page + $range - 1);
 
-                // Điều chỉnh trang bắt đầu nếu chúng ta ở gần cuối
                 if ($end_page - $start_page < $range - 1) { $start_page=max(1, $end_page - $range + 1); }
-                    echo '<div class="modulepager">' ; echo '<ul class="pagination">' ; for ($i=$start_page; $i
-                    <=$end_page; $i++) { if ($i==$paged) { echo '<li class="PagerCurrentPageCell active">' ;
-                    echo '<span class="SelectedPage" title="Navigate to Page ' . $i . '">' . $i . '</span>' ;
-                    echo '</li>' ; } else { echo '<li class="PagerOtherPageCells">' ;
-                    echo '<a class="ModulePager" href="' . get_pagenum_link($i) . '" title="Navigate to Page ' . $i
-                    . '">' . $i . '</a>' ; echo '</li>' ; } } if ($paged < $max_pages) {
-                    echo '<li class="PagerOtherPageCells">' ; echo '<a class="ModulePager NextPage" href="' .
-                    get_pagenum_link($paged + 1) . '" title="Next to Page ' . ($paged + 1) . '">›</a>' ; echo '</li>' ;
-                    } { echo '<li class="PagerOtherPageCells">' ; echo '<a class="ModulePager LastPage" href="' .
-                    get_pagenum_link($max_pages) . '" title="Navigate to Last Page">»</a>' ; echo '</li>' ; }
-                    echo '</ul>' ; echo '</div>' ; }
+                    echo '<div class="modulepager"><ul class="pagination">' ; if ($paged> 1) {
+                    echo '<li><a href="' . get_pagenum_link($paged - 1) . '" class="PrevPage">‹</a></li>';
+                    }
+
+                    for ($i = $start_page; $i <= $end_page; $i++) { if ($i==$paged) { echo '<li class="active"><span>' .
+                        $i . '</span></li>' ; } else { echo '<li><a href="' . get_pagenum_link($i) . '">' . $i
+                        . '</a></li>' ; } } if ($paged < $max_pages) { echo '<li><a href="' . get_pagenum_link($paged +
+                        1) . '" class="NextPage">›</a></li>' ; } echo '<li><a href="' . get_pagenum_link($max_pages)
+                        . '" class="LastPage">»</a></li>' ; echo '</ul></div>' ; }

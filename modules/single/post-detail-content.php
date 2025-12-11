@@ -231,7 +231,9 @@ $website = get_field('website', $post_id);
     if (!empty($great_read_posts)) :
     ?>
     <div class="box-great">
-        <h2 class="main-title dotted">the great read</h2>
+        <h2 class="main-title dotted">
+            <?php echo esc_html__('The Great Read', 'canhcamtheme'); ?>
+        </h2>
         <div class="great-list">
             <?php foreach ($great_read_posts as $great_post) :
                 $great_thumbnail_url = get_image_post($great_post->ID, 'url');

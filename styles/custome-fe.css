@@ -10,6 +10,12 @@
     --border-color: #e1e1e1;
     --hover-color: rgba(60, 0, 0, 1);
 }
+:root {
+    --design-width: 1920; 
+    --vw-base: calc(100vw / var(--design-width));
+}
+
+
 body {
     font-family: 'Arimo', sans-serif;
 }
@@ -22,18 +28,25 @@ body {
     margin-right: auto;
 }
 .about-nav {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
     white-space: nowrap;
-    overflow: auto;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
 }
-.about-nav {
--ms-overflow-style: none;
-scrollbar-width: none;
-}
+
 .about-nav::-webkit-scrollbar {
- display: none;
+    display: none; 
 }
+
 footer .footer-top .social-list li a img {
     height: 1.25rem;
+}
+.modulepager {
+    margin-left: auto;
+    margin-right: auto;
 }
 .modulepager .pagination li.active a, .modulepager .pagination li.active span, .modulepager .pagination li:hover a, .modulepager .pagination li:hover span {
     background: var(--primary2-color);
@@ -53,12 +66,19 @@ footer .footer-top .social-list li a img {
 header .bottom-wrap {
     background: var(--primary-color);
 }
+header .bottom-wrap .left-wrap {
+    width: 90%;
+    margin-left: 0px;
+}
+header .menu-list {
+    justify-content: space-between;
+}
 header .menu-list>li>a {
     color: #fff;
     background: var(--primary-color);
 }
-header .menu-list>li.active>a,
-header .menu-list>li:hover>a {
+header .main-menu .menu-list>li.active>a,
+header .main-menu .menu-list>li:hover>a {
     color: #fff;
     background: var(--primary2-color);
 }
@@ -96,7 +116,8 @@ footer .footer-bottom {
     content: none !important;
 }
 .page-product .banner-child .image {
-    height: 465px;
+    height: calc(456 / 1920 * 100rem);
+    
 }
 @media (max-width: 768px) {
     .page-product .banner-child .image {
@@ -230,6 +251,7 @@ footer .footer-bottom {
 }
 
 .custom-contact-form .btn-submit {
+    order: 3;
     border: none;
     background: var(--primary-color);
     padding: 13px 30px;
@@ -408,12 +430,12 @@ footer .logo {
     margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     header .logo img,
     footer .logo img {
         max-width: 10rem;
     }
-}
+} */
 
 /* ========================================
    PRODUCT PAGE STYLES
@@ -437,12 +459,12 @@ footer .logo {
 }
 
 .product-categories-nav .categories-list-wrapper {
-    overflow: hidden;
+    /* overflow: hidden; */
     flex: 1;
 }
 
 .product-categories-nav .categories-list {
-    padding: 0 0.25rem;
+    /* padding: 0 0.25rem; */
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -493,7 +515,7 @@ footer .logo {
     transition: all 0.3s ease;
     min-width: 120px;
     display: flex;
-    padding: 8px 24px;
+    padding: 8px 22px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -504,6 +526,7 @@ footer .logo {
     filter: grayscale(100%);
     transition: filter 0.3s ease;
     opacity: 0.7;
+    width: 100%;
 }
 .product-categories-nav .category-item:hover,
 .product-categories-nav .category-item.active {
@@ -535,7 +558,7 @@ footer .logo {
 
 .product-categories-nav .category-name {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -1174,4 +1197,63 @@ footer .logo {
         width: 30px;
         height: 30px;
     }
+}
+
+
+.about-nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.about-nav {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.about-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* Nút prev/next */
+.nav-btn {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 10px;
+    z-index: 10;
+    display: none; /* Ẩn mặc định */
+}
+
+/* Gradient hiệu ứng YouTube */
+.about-nav-gradient {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    pointer-events: none;
+    display: none; /* Ẩn mặc định */
+}
+
+.about-nav-gradient.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.about-nav-gradient.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+/* Khi cần hiển thị */
+.show-nav-ui .nav-btn,
+.show-nav-ui .about-nav-gradient {
+    display: block;
 }
