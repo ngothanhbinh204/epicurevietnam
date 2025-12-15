@@ -351,7 +351,7 @@ add_filter('rank_math/frontend/breadcrumb/html', function($html, $crumbs, $class
 		return '';
 	}
 	
-	$output = '<div class="main-breadcrumb"><div class="Module Module-150">';
+	$output = '<div class="main-breadcrumb"><div class="container *:Module Module-150">';
 	$output .= '<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">';
 	
 	foreach ($crumbs as $index => $crumb) {

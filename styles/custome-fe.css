@@ -30,6 +30,7 @@ body {
 .about-nav {
     display: flex;
     gap: 16px;
+    flex-direction: column;
     overflow-x: auto;
     white-space: nowrap;
     cursor: grab;
@@ -115,15 +116,7 @@ footer .footer-bottom {
 .no-backdrop-banner .banner-child .image:before {
     content: none !important;
 }
-.page-product .banner-child .image {
-    height: calc(456 / 1920 * 100rem);
-    
-}
-@media (max-width: 768px) {
-    .page-product .banner-child .image {
-        height: 300px;
-    }
-}
+
 .home-slide.main-section.news-speed .container .main-title:first-child {
     margin-top: 0px;
 }
@@ -181,6 +174,7 @@ footer .footer-bottom {
 .custom-contact-form .form-group {
     position: relative;
     display: flex;
+    flex-direction: column;
 }
 
 .custom-contact-form label {
@@ -337,10 +331,15 @@ footer .footer-bottom {
 }
 
 @media (min-width:576px) {
+    .custom-contact-form .form-group {
+        display: flex;
+        flex-direction: row;
+    }
     .custom-contact-form .form-group label{
         margin-top: 5px;
         padding-right: 5px;
         width: 155px;
+      
     }
     
     .custom-contact-form .captcha-group label {
@@ -481,7 +480,7 @@ footer .logo {
     border: 1px solid #E1E1E1;
     border-radius: 50%;
     background: #fff;
-    color: #333;
+    color: #929292;
     cursor: pointer;
     transition: all 0.3s ease;
     flex-shrink: 0;
@@ -1199,8 +1198,15 @@ footer .logo {
     }
 }
 
-
-.about-nav-container {
+.show-nav-ui .nav-btn,
+.show-nav-ui .about-nav-gradient {
+    display: none;
+}
+.about-nav-container button.nav-btn {
+    display: none;
+}
+@media (min-width: 1024px) {
+    .about-nav-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -1215,6 +1221,8 @@ footer .logo {
     scrollbar-width: none;
     white-space: nowrap;
     padding: 10px 0;
+    flex-direction: row;
+
 }
 
 .about-nav::-webkit-scrollbar {
@@ -1229,17 +1237,16 @@ footer .logo {
     font-size: 18px;
     padding: 8px 10px;
     z-index: 10;
-    display: none; /* Ẩn mặc định */
+    display: none; 
 }
 
-/* Gradient hiệu ứng YouTube */
 .about-nav-gradient {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 40px;
     pointer-events: none;
-    display: none; /* Ẩn mặc định */
+    display: none;
 }
 
 .about-nav-gradient.left {
@@ -1252,8 +1259,9 @@ footer .logo {
     background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
 }
 
-/* Khi cần hiển thị */
 .show-nav-ui .nav-btn,
 .show-nav-ui .about-nav-gradient {
-    display: block;
+    display: block !important;
+}
+
 }

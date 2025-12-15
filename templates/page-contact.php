@@ -7,6 +7,7 @@ Template name: Page - Contact
 </h1>
 
 <?php get_template_part('modules/common/banner')?>
+<?php get_template_part('modules/common/breadcrumb')?>
 
 <section class="om-contact main-section">
     <div class="container">

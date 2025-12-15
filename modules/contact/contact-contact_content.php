@@ -6,6 +6,7 @@ $form_shortcode = get_sub_field('form_shortcode');
 $sidebar_title = get_sub_field('sidebar_title');
 $contact_info_items = get_sub_field('contact_info_items');
 ?>
+
 <div class="row">
     <div class="col-lg-8">
         <?php if (!empty($main_title)): ?>
