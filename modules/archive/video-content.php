@@ -3,6 +3,9 @@
  * Video Archive Layout
  */
 
+$custom_query = get_query_var('custom_query');
+$query = $custom_query ? $custom_query : $GLOBALS['wp_query'];
+
 /* ---------------------------
  * Title
  * --------------------------- */
@@ -12,6 +15,8 @@ if (is_tax() || is_category()) {
     $title = single_term_title('', false);
 } elseif (is_post_type_archive()) {
     $title = post_type_archive_title('', false);
+} elseif ($custom_query) {
+    $title = get_the_title();
 } else {
     $title = get_the_archive_title();
 }
@@ -27,8 +32,8 @@ $main_post  = null;
 $side_posts = [];
 $count      = 0;
 
-if (have_posts()) :
-    while (have_posts()) : the_post();
+if ($query->have_posts()) :
+    while ($query->have_posts()) : $query->the_post();
         $count++;
         if ($count === 1) {
             $main_post = get_post();
@@ -40,6 +45,13 @@ if (have_posts()) :
     endwhile;
 endif;
 
+// Don't reset postdata yet if we are using custom query and want to continue loop?
+// Actually the original code did wp_reset_postdata();
+// But here we are just collecting posts.
+// If we use custom query, we should probably not reset if we want to continue?
+// But the original code breaks the loop.
+// And then later it does NOT rewind. It continues?
+// Wait, let's check the original code again.
 wp_reset_postdata();
 ?>
 
@@ -140,10 +152,11 @@ endif;
     <div class="col-lg-8 col-xl-9">
         <div class="row news-video-bottom">
             <?php
+            $query->rewind_posts();
             $count = 0;
 
-            if (have_posts()) :
-                while (have_posts()) : the_post();
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
                     $count++;
                     if ($count <= 5) continue;
             ?>
@@ -172,7 +185,18 @@ endif;
             ?>
         </div>
 
-        <?php custom_pagination(); ?>
+        <?php
+        if (function_exists('custom_pagination')) {
+            if ($custom_query) {
+                $temp_query = $GLOBALS['wp_query'];
+                $GLOBALS['wp_query'] = $custom_query;
+                custom_pagination();
+                $GLOBALS['wp_query'] = $temp_query;
+            } else {
+                custom_pagination();
+            }
+        }
+        ?>
     </div>
 
     <!-- SIDEBAR -->

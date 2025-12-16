@@ -267,3 +267,34 @@ function enqueue_lazyload_script() {
     );
 }
 add_action('wp_enqueue_scripts', 'enqueue_lazyload_script');
+
+// Redirect archives to pages
+function redirect_archives_to_pages() {
+    if (is_post_type_archive()) {
+        $post_type = get_query_var('post_type');
+        if (is_array($post_type)) {
+            $post_type = reset($post_type);
+        }
+        
+        // Only redirect for our specific post types
+        $target_post_types = ['shopping', 'experiences', 'events', 'vouchers', 'video'];
+        if (!in_array($post_type, $target_post_types)) {
+            return;
+        }
+
+        // Find page with this archive_post_type
+        $pages = get_posts(array(
+            'post_type' => 'page',
+            'meta_key' => 'archive_post_type',
+            'meta_value' => $post_type,
+            'posts_per_page' => 1,
+            'fields' => 'ids'
+        ));
+        
+        if (!empty($pages)) {
+            wp_redirect(get_permalink($pages[0]), 301);
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'redirect_archives_to_pages');

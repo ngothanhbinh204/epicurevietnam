@@ -486,17 +486,17 @@ function add_archive_banner_settings()
 				'type' => 'tab',
 				'placement' => 'top',
 			),
-			array(
-				'key' => 'field_experiences_banner',
-				'label' => 'Banner cho Trải nghiệm',
-				'name' => 'experiences_banner',
-				'type' => 'post_object',
-				'instructions' => 'Chọn banner hiển thị cho archive Trải nghiệm',
-				'post_type' => array('banner'),
-				'allow_null' => 1,
-				'multiple' => 0,
-				'return_format' => 'object',
-			),
+			// array(
+			// 	'key' => 'field_experiences_banner',
+			// 	'label' => 'Banner cho Trải nghiệm',
+			// 	'name' => 'experiences_banner',
+			// 	'type' => 'post_object',
+			// 	'instructions' => 'Chọn banner hiển thị cho archive Trải nghiệm',
+			// 	'post_type' => array('banner'),
+			// 	'allow_null' => 1,
+			// 	'multiple' => 0,
+			// 	'return_format' => 'object',
+			// ),
 			array(
 				'key' => 'field_experiences_middle_banner',
 				'label' => 'Banner Middle (Giữa trang)',
@@ -560,17 +560,17 @@ function add_archive_banner_settings()
 				'type' => 'tab',
 				'placement' => 'top',
 			),
-			array(
-				'key' => 'field_events_banner',
-				'label' => 'Banner cho Sự kiện',
-				'name' => 'events_banner',
-				'type' => 'post_object',
-				'instructions' => 'Chọn banner hiển thị cho archive Sự kiện',
-				'post_type' => array('banner'),
-				'allow_null' => 1,
-				'multiple' => 0,
-				'return_format' => 'object',
-			),
+			// array(
+			// 	'key' => 'field_events_banner',
+			// 	'label' => 'Banner cho Sự kiện',
+			// 	'name' => 'events_banner',
+			// 	'type' => 'post_object',
+			// 	'instructions' => 'Chọn banner hiển thị cho archive Sự kiện',
+			// 	'post_type' => array('banner'),
+			// 	'allow_null' => 1,
+			// 	'multiple' => 0,
+			// 	'return_format' => 'object',
+			// ),
 			array(
 				'key' => 'field_events_middle_banner',
 				'label' => 'Banner Middle (Giữa trang)',
@@ -635,17 +635,17 @@ function add_archive_banner_settings()
 				'type' => 'tab',
 				'placement' => 'top',
 			),
-			array(
-				'key' => 'field_vouchers_banner',
-				'label' => 'Banner cho Ưu đãi',
-				'name' => 'vouchers_banner',
-				'type' => 'post_object',
-				'instructions' => 'Chọn banner hiển thị cho archive Ưu đãi',
-				'post_type' => array('banner'),
-				'allow_null' => 1,
-				'multiple' => 0,
-				'return_format' => 'object',
-			),
+			// array(
+			// 	'key' => 'field_vouchers_banner',
+			// 	'label' => 'Banner cho Ưu đãi',
+			// 	'name' => 'vouchers_banner',
+			// 	'type' => 'post_object',
+			// 	'instructions' => 'Chọn banner hiển thị cho archive Ưu đãi',
+			// 	'post_type' => array('banner'),
+			// 	'allow_null' => 1,
+			// 	'multiple' => 0,
+			// 	'return_format' => 'object',
+			// ),
 			array(
 				'key' => 'field_vouchers_middle_banner',
 				'label' => 'Banner Middle (Giữa trang)',
@@ -710,17 +710,17 @@ function add_archive_banner_settings()
 				'type' => 'tab',
 				'placement' => 'top',
 			),
-			array(
-				'key' => 'field_shopping_banner',
-				'label' => 'Banner cho Mua sắm',
-				'name' => 'shopping_banner',
-				'type' => 'post_object',
-				'instructions' => 'Chọn banner hiển thị cho archive Mua sắm',
-				'post_type' => array('banner'),
-				'allow_null' => 1,
-				'multiple' => 0,
-				'return_format' => 'object',
-			),
+			// array(
+			// 	'key' => 'field_shopping_banner',
+			// 	'label' => 'Banner cho Mua sắm',
+			// 	'name' => 'shopping_banner',
+			// 	'type' => 'post_object',
+			// 	'instructions' => 'Chọn banner hiển thị cho archive Mua sắm',
+			// 	'post_type' => array('banner'),
+			// 	'allow_null' => 1,
+			// 	'multiple' => 0,
+			// 	'return_format' => 'object',
+			// ),
 			array(
 				'key' => 'field_shopping_middle_banner',
 				'label' => 'Banner Middle (Giữa trang)',
@@ -785,17 +785,17 @@ function add_archive_banner_settings()
 				'type' => 'tab',
 				'placement' => 'top',
 			),
-			array(
-				'key' => 'field_video_banner',
-				'label' => 'Banner cho Video',
-				'name' => 'video_banner',
-				'type' => 'post_object',
-				'instructions' => 'Chọn banner hiển thị cho archive Video',
-				'post_type' => array('banner'),
-				'allow_null' => 1,
-				'multiple' => 0,
-				'return_format' => 'object',
-			),
+			// array(
+			// 	'key' => 'field_video_banner',
+			// 	'label' => 'Banner cho Video',
+			// 	'name' => 'video_banner',
+			// 	'type' => 'post_object',
+			// 	'instructions' => 'Chọn banner hiển thị cho archive Video',
+			// 	'post_type' => array('banner'),
+			// 	'allow_null' => 1,
+			// 	'multiple' => 0,
+			// 	'return_format' => 'object',
+			// ),
 			array(
 				'key' => 'field_video_middle_banner',
 				'label' => 'Banner Middle (Giữa trang)',
@@ -1000,3 +1000,39 @@ function add_video_url_field()
 	));
 }
 add_action('acf/init', 'add_video_url_field');
+
+// Add Archive Page Settings
+function add_archive_page_settings() {
+    acf_add_local_field_group(array(
+        'key' => 'group_archive_page_settings',
+        'title' => 'Archive Page Settings',
+        'fields' => array(
+            array(
+                'key' => 'field_archive_post_type',
+                'label' => 'Archive Post Type',
+                'name' => 'archive_post_type',
+                'type' => 'select',
+                'instructions' => 'Select the post type to display on this page.',
+                'required' => 1,
+                'choices' => array(
+                    'shopping' => 'Shopping',
+                    'experiences' => 'Experiences',
+                    'events' => 'Events',
+                    'vouchers' => 'Vouchers',
+                    'video' => 'Video',
+                ),
+                'return_format' => 'value',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'templates/page-archive.php',
+                ),
+            ),
+        ),
+    ));
+}
+add_action('acf/init', 'add_archive_page_settings');

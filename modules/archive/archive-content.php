@@ -1,4 +1,7 @@
 <?php
+$custom_query = get_query_var('custom_query');
+$query = $custom_query ? $custom_query : $GLOBALS['wp_query'];
+
 $queried_object = get_queried_object();
 $title = '';
 
@@ -7,6 +10,9 @@ if (is_tax() || is_category()) {
     $title = single_term_title('', false);
 } elseif (is_post_type_archive()) {
     $title = post_type_archive_title('', false);
+} elseif ($custom_query) {
+    // For custom page templates, use the page title or archive title
+    $title = get_the_title(); 
 } else {
     $title = get_the_archive_title();
 }
@@ -17,8 +23,8 @@ if (is_tax() || is_category()) {
 <div class="row box-whaton-top">
     <?php 
     $count = 0;
-    if (have_posts()) :
-        while (have_posts() && $count < 6) : the_post();
+    if ($query->have_posts()) :
+        while ($query->have_posts() && $count < 6) : $query->the_post();
             $count++;
             $item_class = ($count <= 2) ? 'news-item-top' : 'news-item-bottom';
             $thumbnail = get_the_post_thumbnail(get_the_ID(), 'full');
@@ -51,7 +57,7 @@ if (is_tax() || is_category()) {
 
 <?php
 // Get banner ads for middle section based on post type
-$post_type = get_post_type();
+$post_type = get_query_var('archive_post_type') ? get_query_var('archive_post_type') : get_post_type();
 $banner_field_name = $post_type . '_middle_banner';
 $banner_ads = get_field($banner_field_name, 'option');
 
@@ -75,11 +81,11 @@ endif;
         <div class="whaton-list">
             <?php
             // Rewind query to show remaining posts
-            rewind_posts();
+            $query->rewind_posts();
             $count = 0;
             
-            if (have_posts()) :
-                while (have_posts()) : the_post();
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
                     $count++;
                     // Skip first 6 posts (already shown above)
                     if ($count <= 6) continue;
@@ -115,7 +121,7 @@ endif;
     <div class="col-lg-4 col-xl-3">
         <?php
         // Get sidebar banner ads based on post type
-        $post_type = get_post_type();
+        $post_type = get_query_var('archive_post_type') ? get_query_var('archive_post_type') : get_post_type();
         $sidebar_field_name = $post_type . '_sidebar_banners';
         $sidebar_banners = get_field($sidebar_field_name, 'option');
         
@@ -126,15 +132,29 @@ endif;
 
         // Lấy dữ liệu
         $image = !empty($banner['banner_image']) ? $banner['banner_image'] : null;
-        $link  = !empty($banner['banner_link'])  ? $banner['banner_link']['url']  : null;
+        $link  = !empty($banner['banner_link'])  ? $banner['banner_link']  : null;
+
+        $banner_url = '';
+
+        if ($link) {
+            // ACF Link field (array)
+            if (is_array($link) && isset($link['url'])) {
+                $banner_url = $link['url'];
+            }
+            // URL field (string)
+            elseif (is_string($link)) {
+                $banner_url = $link;
+            }
+        }
+
 
         if (!$image) {
             continue;
         }
     ?>
             <div class="banner-item">
-                <?php if ($link) : ?>
-                <a href="<?= esc_url($link) ?>">
+                <?php if ($banner_url ) : ?>
+                <a href="<?= esc_url($banner_url ) ?>">
                     <?= get_image_attrachment($image) ?>
                 </a>
                 <?php else : ?>
@@ -150,7 +170,14 @@ endif;
     <?php
         // Pagination
         if (function_exists('custom_pagination')) {
-            custom_pagination();
+            if ($custom_query) {
+                $temp_query = $GLOBALS['wp_query'];
+                $GLOBALS['wp_query'] = $custom_query;
+                custom_pagination();
+                $GLOBALS['wp_query'] = $temp_query;
+            } else {
+                custom_pagination();
+            }
         }
         ?>
 </div>

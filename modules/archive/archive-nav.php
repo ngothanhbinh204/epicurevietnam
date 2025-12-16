@@ -1,6 +1,6 @@
 <?php
 // Get current post type
-$post_type = get_post_type();
+$post_type = get_query_var('archive_post_type') ? get_query_var('archive_post_type') : get_post_type();
 
 // Get taxonomies for this post type
 $taxonomies = get_object_taxonomies($post_type, 'objects');
