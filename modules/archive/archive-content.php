@@ -57,7 +57,7 @@ $banner_ads = get_field($banner_field_name, 'option');
 
 if (!empty($banner_ads)) :
     foreach ($banner_ads as $banner) :
-        if (!empty($banner['banner_image']) && !empty($banner['banner_link'])) :
+        if (!empty($banner['banner_image'])) :
 ?>
 <div class="banner-full">
     <a href="<?= esc_url($banner['banner_link']) ?>">
@@ -126,7 +126,7 @@ endif;
 
         // Lấy dữ liệu
         $image = !empty($banner['banner_image']) ? $banner['banner_image'] : null;
-        $link  = !empty($banner['banner_link'])  ? $banner['banner_link']  : null;
+        $link  = !empty($banner['banner_link'])  ? $banner['banner_link']['url']  : null;
 
         if (!$image) {
             continue;

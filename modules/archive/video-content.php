@@ -1,8 +1,13 @@
 <?php
-$queried_object = get_queried_object();
+/**
+ * Video Archive Layout
+ */
+
+/* ---------------------------
+ * Title
+ * --------------------------- */
 $title = '';
 
-// Get title based on current view
 if (is_tax() || is_category()) {
     $title = single_term_title('', false);
 } elseif (is_post_type_archive()) {
@@ -10,60 +15,61 @@ if (is_tax() || is_category()) {
 } else {
     $title = get_the_archive_title();
 }
-
-// Get video URL from ACF field
-function get_video_url($post_id = null) {
-    if (!$post_id) $post_id = get_the_ID();
-    $video_url = get_field('video_url', $post_id);
-    return $video_url ? $video_url : '';
-}
 ?>
 
 <h1 class="main-title dotted"><?= esc_html($title) ?></h1>
 
+<?php
+/* ---------------------------
+ * Collect first 5 posts
+ * --------------------------- */
+$main_post  = null;
+$side_posts = [];
+$count      = 0;
+
+if (have_posts()) :
+    while (have_posts()) : the_post();
+        $count++;
+        if ($count === 1) {
+            $main_post = get_post();
+        } elseif ($count <= 5) {
+            $side_posts[] = get_post();
+        } else {
+            break;
+        }
+    endwhile;
+endif;
+
+wp_reset_postdata();
+?>
+
 <div class="news-video">
     <div class="news-body">
         <div class="row">
-            <?php 
-            $main_post = null;
-            $side_posts = [];
-            $count = 0;
-            
-            if (have_posts()) :
-                while (have_posts() && $count < 5) : the_post();
-                    $count++;
-                    if ($count === 1) {
-                        $main_post = get_post();
-                    } else {
-                        $side_posts[] = get_post();
-                    }
-                endwhile;
-            endif;
-            
-            // Display main video (left caption)
-            if ($main_post) :
-                $video_url = get_field('video_url', $main_post->ID);
-            ?>
+
+            <?php if ($main_post) : ?>
+            <!-- LEFT -->
             <div class="col-lg-3">
                 <div class="news-item news-item-video news-item-video-big">
                     <div class="caption">
-                        <a class="title"
-                            href="<?= get_permalink($main_post->ID) ?>"><?= get_the_title($main_post->ID) ?></a>
-                        <?php if (has_excerpt($main_post->ID)): ?>
+                        <a class="title" href="<?= esc_url(get_permalink($main_post->ID)) ?>">
+                            <?= esc_html(get_the_title($main_post->ID)) ?>
+                        </a>
+                        <?php if (has_excerpt($main_post->ID)) : ?>
                         <div class="des">
-                            <p><?= get_the_excerpt($main_post->ID) ?></p>
+                            <p><?= esc_html(get_the_excerpt($main_post->ID)) ?></p>
                         </div>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
 
-            <!-- Main video image (center) -->
+            <!-- CENTER -->
             <div class="col-lg-6">
                 <div class="news-item news-item-video news-item-video-big">
                     <div class="image">
-                        <a href="<?= get_permalink($main_post->ID) ?>">
-                            <?php echo get_image_post($main_post->ID); ?>
+                        <a href="<?= esc_url(get_permalink($main_post->ID)) ?>">
+                            <?= get_image_post($main_post->ID); ?>
                         </a>
                         <div class="icon-play">
                             <em class="mdi mdi-play-circle"></em>
@@ -73,116 +79,127 @@ function get_video_url($post_id = null) {
             </div>
             <?php endif; ?>
 
-            <!-- Side videos (right column) -->
+            <!-- RIGHT -->
             <div class="col-lg-3">
                 <div class="news-list row">
-                    <?php 
-                    foreach ($side_posts as $side_post) :
-                        $video_url = get_field('video_url', $side_post->ID);
-                    ?>
+                    <?php if (!empty($side_posts)) : ?>
+                    <?php foreach ($side_posts as $side_post) : ?>
                     <div class="col-md-6 col-lg-12 news-item news-item-child news-item-video">
                         <div class="image">
-                            <a href="<?= get_permalink($side_post->ID) ?>">
-                                <?php echo get_image_post($side_post->ID); ?>
+                            <a href="<?= esc_url(get_permalink($side_post->ID)) ?>">
+                                <?= get_image_post($side_post->ID); ?>
                             </a>
                             <div class="icon-play">
                                 <em class="mdi mdi-play-circle"></em>
                             </div>
                         </div>
                         <div class="caption">
-                            <a class="title"
-                                href="<?= get_permalink($side_post->ID) ?>"><?= get_the_title($side_post->ID) ?></a>
+                            <a class="title" href="<?= esc_url(get_permalink($side_post->ID)) ?>">
+                                <?= esc_html(get_the_title($side_post->ID)) ?>
+                            </a>
                         </div>
                     </div>
                     <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 <?php
+/* ---------------------------
+ * Middle Banner
+ * --------------------------- */
 $banner_ads = get_field('video_middle_banner', 'option');
 
 if (!empty($banner_ads)) :
     foreach ($banner_ads as $banner) :
-        if (!empty($banner['banner_image']) && !empty($banner['banner_link'])) :
+        if (empty($banner['banner_image'])) continue;
+
+        $link = $banner['banner_link'] ?? '';
 ?>
 <div class="banner-full">
-    <a href="<?= esc_url($banner['banner_link']) ?>">
-        <?= get_image_attrachment($banner['banner_image']) ?>
+    <?php if ($link) : ?>
+    <a href="<?= esc_url($link) ?>">
+        <?= get_image_attrachment($banner['banner_image']); ?>
     </a>
+    <?php else : ?>
+    <?= get_image_attrachment($banner['banner_image']); ?>
+    <?php endif; ?>
 </div>
 <?php
-        endif;
     endforeach;
 endif;
 ?>
 
 <div class="row">
+
+    <!-- MAIN CONTENT -->
     <div class="col-lg-8 col-xl-9">
         <div class="row news-video-bottom">
             <?php
-            // Reset and show remaining videos
-            wp_reset_postdata();
-            rewind_posts();
             $count = 0;
-            
+
             if (have_posts()) :
                 while (have_posts()) : the_post();
                     $count++;
-                    // Skip first 5 posts (already shown above)
                     if ($count <= 5) continue;
-                    
-                    $video_url = get_field('video_url', get_the_ID());
             ?>
             <div class="col-sm-6 col-lg-4">
                 <div class="news-item news-item-video">
                     <div class="image">
-                        <a href="<?= get_permalink() ?>">
-                            <?php echo get_image_post($main_post->ID); ?>
+                        <a href="<?= esc_url(get_permalink()) ?>">
+                            <?= get_image_post(get_the_ID()); ?>
                         </a>
                         <div class="icon-play">
                             <em class="mdi mdi-play-circle"></em>
                         </div>
                     </div>
                     <div class="caption">
-                        <a class="title" href="<?= get_permalink() ?>"><?= get_the_title() ?></a>
+                        <a class="title" href="<?= esc_url(get_permalink()) ?>">
+                            <?= esc_html(get_the_title()) ?>
+                        </a>
                     </div>
                 </div>
             </div>
-            <?php 
+            <?php
                 endwhile;
             endif;
+
             wp_reset_postdata();
             ?>
         </div>
 
-        <!-- Pagination -->
         <?php custom_pagination(); ?>
     </div>
 
+    <!-- SIDEBAR -->
     <div class="col-lg-4 col-xl-3">
         <?php
-        // Get sidebar banner ads
         $sidebar_banners = get_field('video_sidebar_banners', 'option');
-        
+
         if (!empty($sidebar_banners)) :
         ?>
         <div class="banner-qc-list">
             <?php foreach ($sidebar_banners as $banner) :
-                if (!empty($banner['banner_image']) && !empty($banner['banner_link'])) :
+                if (empty($banner['banner_image'])) continue;
+
+                $link = $banner['banner_link'] ?? '';
             ?>
             <div class="banner-item">
-                <a href="<?= esc_url($banner['banner_link']) ?>">
-                    <?= get_image_attrachment($banner['banner_image']) ?>
+                <?php if ($link) : ?>
+                <a href="<?= esc_url($link) ?>">
+                    <?= get_image_attrachment($banner['banner_image']); ?>
                 </a>
+                <?php else : ?>
+                <?= get_image_attrachment($banner['banner_image']); ?>
+                <?php endif; ?>
             </div>
-            <?php
-                endif;
-            endforeach;
-            ?>
+            <?php endforeach; ?>
         </div>
         <?php endif; ?>
     </div>
+
 </div>

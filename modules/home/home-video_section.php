@@ -3,7 +3,6 @@ $title = get_sub_field('title');
 $video_category = get_sub_field('video_category');
 $menu_categories = get_sub_field('menu_categories');
 $view_all_link = get_sub_field('view_all_link');
-$featured_video = get_sub_field('featured_video');
 $main_video = get_sub_field('main_video');
 $video_list = get_sub_field('video_list');
 
@@ -38,8 +37,8 @@ if (!$title) return;
 
             <!-- Featured video -->
             <div class="col-lg-3">
-                <?php if (!empty($featured_video)) :
-                    $post = $featured_video[0];
+                <?php if (!empty($main_video)) :
+                    $post = $main_video[0];
                     setup_postdata($post);
                 ?>
                 <div class="news-item news-item-video news-item-video-big">

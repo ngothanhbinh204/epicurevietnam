@@ -26,6 +26,12 @@ function custom_post_types_rewrite_rules() {
         'index.php?shopping=$matches[2]',
         'top'
     );
+    // Shopping rules - category archive with pagination
+    add_rewrite_rule(
+        '^shopping/([^/]+)/page/([0-9]+)/?$',
+        'index.php?shopping_category=$matches[1]&shopping_fallback=$matches[1]&paged=$matches[2]',
+        'top'
+    );
     // Shopping rules - category archive OR post without category
     add_rewrite_rule(
         '^shopping/([^/]+)/?$',
@@ -37,6 +43,12 @@ function custom_post_types_rewrite_rules() {
     add_rewrite_rule(
         '^experiences/([^/]+)/([^/]+)/?$',
         'index.php?experiences=$matches[2]',
+        'top'
+    );
+    // Experiences rules - category archive with pagination
+    add_rewrite_rule(
+        '^experiences/([^/]+)/page/([0-9]+)/?$',
+        'index.php?experiences_category=$matches[1]&experiences_fallback=$matches[1]&paged=$matches[2]',
         'top'
     );
     // Experiences rules - category archive OR post without category
@@ -52,6 +64,12 @@ function custom_post_types_rewrite_rules() {
         'index.php?events=$matches[2]',
         'top'
     );
+    // Events rules - category archive with pagination
+    add_rewrite_rule(
+        '^events/([^/]+)/page/([0-9]+)/?$',
+        'index.php?events_category=$matches[1]&events_fallback=$matches[1]&paged=$matches[2]',
+        'top'
+    );
     // Events rules - category archive OR post without category
     add_rewrite_rule(
         '^events/([^/]+)/?$',
@@ -63,6 +81,12 @@ function custom_post_types_rewrite_rules() {
     add_rewrite_rule(
         '^vouchers/([^/]+)/([^/]+)/?$',
         'index.php?vouchers=$matches[2]',
+        'top'
+    );
+    // Vouchers rules - category archive with pagination
+    add_rewrite_rule(
+        '^vouchers/([^/]+)/page/([0-9]+)/?$',
+        'index.php?vouchers_category=$matches[1]&vouchers_fallback=$matches[1]&paged=$matches[2]',
         'top'
     );
     // Vouchers rules - category archive OR post without category
@@ -78,6 +102,12 @@ function custom_post_types_rewrite_rules() {
         'index.php?video=$matches[2]',
         'top'
     );
+    // Video rules (new URL: videos) - category archive with pagination
+    add_rewrite_rule(
+        '^videos/([^/]+)/page/([0-9]+)/?$',
+        'index.php?video_category=$matches[1]&video_fallback=$matches[1]&paged=$matches[2]',
+        'top'
+    );
     // Video rules - category archive OR post without category
     add_rewrite_rule(
         '^videos/([^/]+)/?$',
@@ -89,6 +119,12 @@ function custom_post_types_rewrite_rules() {
     add_rewrite_rule(
         '^video/([^/]+)/([^/]+)/?$',
         'index.php?video=$matches[2]',
+        'top'
+    );
+    // Video rules (old URL: video) - category archive with pagination
+    add_rewrite_rule(
+        '^video/([^/]+)/page/([0-9]+)/?$',
+        'index.php?video_category=$matches[1]&video_fallback=$matches[1]&paged=$matches[2]',
         'top'
     );
     // Video rules (old URL) - category archive OR post without category
@@ -214,9 +250,9 @@ add_filter('term_link', 'custom_post_types_term_link', 10, 2);
 
 // Flush rewrite rules once to apply changes
 add_action('wp_loaded', function() {
-    if (!get_option('custom_post_types_rewrite_rules_flushed_v4') || isset($_GET['flush_rules'])) {
+    if (!get_option('custom_post_types_rewrite_rules_flushed_v5') || isset($_GET['flush_rules'])) {
         flush_rewrite_rules();
-        update_option('custom_post_types_rewrite_rules_flushed_v4', true);
+        update_option('custom_post_types_rewrite_rules_flushed_v5', true);
     }
 });
 

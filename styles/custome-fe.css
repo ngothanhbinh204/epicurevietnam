@@ -412,6 +412,7 @@ footer .footer-top .main-news-letter .wpcf7 .subscribebutton {
 
 .main-form.contact-form-wrapper .form-row.row-recapcha-submit {
     display: flex;
+    flex-wrap: wrap;
 }
 .main-form.contact-form-wrapper .form-row .form-submit-btn {
     display: inline-flex;
@@ -566,15 +567,17 @@ footer .logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 20px;
 }
 
 .product-filter-wrap .filter-left {
     display: flex;
+    flex: 1;
+    min-width: 0;
     flex-direction: column;
     align-items: flex-start;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 8px;
 }
 .product-filter-wrap .filter-left .wrapper-filter {
@@ -608,7 +611,7 @@ footer .logo {
     cursor: pointer;
     gap: 12px;
     transition: all 0.3s ease;
-    min-width: 180px;
+    min-width: fit-content;
 }
 
 .custom-dropdown .dropdown-toggle .selected-text {
@@ -704,11 +707,15 @@ footer .logo {
 }
 
 .product-filter-wrap .filter-right {
+    flex-shrink: 0;
+    white-space: nowrap;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-
+.product-filter-wrap .filter-right .dropdown-toggle {
+  min-width: 180px;
+}
 
 .product-grid-wrap {
     margin-bottom: 40px;
