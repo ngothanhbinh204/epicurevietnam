@@ -41,19 +41,19 @@ function custom_post_types_rewrite_rules() {
     
     // Experiences rules - with category
     add_rewrite_rule(
-        '^experiences/([^/]+)/([^/]+)/?$',
+        '^experience/([^/]+)/([^/]+)/?$',
         'index.php?experiences=$matches[2]',
         'top'
     );
     // Experiences rules - category archive with pagination
     add_rewrite_rule(
-        '^experiences/([^/]+)/page/([0-9]+)/?$',
+        '^experience/([^/]+)/page/([0-9]+)/?$',
         'index.php?experiences_category=$matches[1]&experiences_fallback=$matches[1]&paged=$matches[2]',
         'top'
     );
     // Experiences rules - category archive OR post without category
     add_rewrite_rule(
-        '^experiences/([^/]+)/?$',
+        '^experience/([^/]+)/?$',
         'index.php?experiences_category=$matches[1]&experiences_fallback=$matches[1]',
         'top'
     );
@@ -213,8 +213,13 @@ function custom_post_types_post_link($post_link, $post) {
         $taxonomy = $post_type_taxonomies[$post->post_type];
         $terms = wp_get_object_terms($post->ID, $taxonomy);
         
-        // Use 'videos' for video post type, otherwise use post_type slug
-        $url_slug = ($post->post_type === 'video') ? 'videos' : $post->post_type;
+        // Use 'videos' for video post type, 'experience' for experiences, otherwise use post_type slug
+        $url_slug = $post->post_type;
+        if ($post->post_type === 'video') {
+            $url_slug = 'videos';
+        } elseif ($post->post_type === 'experiences') {
+            $url_slug = 'experience';
+        }
         
         if ($terms && !is_wp_error($terms) && !empty($terms)) {
             // Post has category - use /post-type/category/post-name/
@@ -233,7 +238,7 @@ add_filter('post_type_link', 'custom_post_types_post_link', 1, 2);
 function custom_post_types_term_link($termlink, $term) {
     $taxonomy_post_types = [
         'shopping_category' => 'shopping',
-        'experiences_category' => 'experiences',
+        'experiences_category' => 'experience',
         'events_category' => 'events',
         'vouchers_category' => 'vouchers',
         'video_category' => 'videos'
@@ -250,11 +255,24 @@ add_filter('term_link', 'custom_post_types_term_link', 10, 2);
 
 // Flush rewrite rules once to apply changes
 add_action('wp_loaded', function() {
-    if (!get_option('custom_post_types_rewrite_rules_flushed_v5') || isset($_GET['flush_rules'])) {
+    if (!get_option('custom_post_types_rewrite_rules_flushed_v6') || isset($_GET['flush_rules'])) {
         flush_rewrite_rules();
-        update_option('custom_post_types_rewrite_rules_flushed_v5', true);
+        update_option('custom_post_types_rewrite_rules_flushed_v6', true);
     }
 });
+
+// Redirect old plural slugs to singular
+function redirect_old_plural_slugs() {
+    $request_uri = $_SERVER['REQUEST_URI'];
+    
+    // Check for experiences -> experience
+    if (strpos($request_uri, '/experiences/') === 0) {
+        $new_uri = str_replace('/experiences/', '/experience/', $request_uri);
+        wp_redirect(home_url($new_uri), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_old_plural_slugs');
 
 // Enqueue lazy loading script
 function enqueue_lazyload_script() {
@@ -298,3 +316,33 @@ function redirect_archives_to_pages() {
     }
 }
 add_action('template_redirect', 'redirect_archives_to_pages');
+
+// Filter Rank Math Breadcrumbs to use Singular Name for Post Type Archives
+add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
+    $target_post_types = ['experiences', 'events', 'vouchers', 'shopping', 'video'];
+    
+    // Determine current post type
+    $post_type = get_post_type();
+    if (!$post_type && is_tax()) {
+        $term = get_queried_object();
+        if ($term && isset($term->taxonomy)) {
+            $taxonomy = get_taxonomy($term->taxonomy);
+            if ($taxonomy && !empty($taxonomy->object_type)) {
+                $post_type = $taxonomy->object_type[0];
+            }
+        }
+    }
+
+    if ($post_type && in_array($post_type, $target_post_types)) {
+        $pt_obj = get_post_type_object($post_type);
+        if ($pt_obj) {
+            foreach ($crumbs as $key => $crumb) {
+                // If the crumb label matches the Plural Name, change it to Singular Name
+                if ($crumb[0] === $pt_obj->labels->name) {
+                    $crumbs[$key][0] = $pt_obj->labels->singular_name;
+                }
+            }
+        }
+    }
+    return $crumbs;
+}, 10, 2);

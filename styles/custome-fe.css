@@ -29,7 +29,7 @@ body {
 }
 .about-nav {
     display: flex;
-    gap: 16px;
+    column-gap: 16px;
     flex-direction: column;
     overflow-x: auto;
     white-space: nowrap;
@@ -220,9 +220,14 @@ footer .footer-bottom {
     background: rgb(250, 250, 250);
     padding: 5px 20px;
 }
-.custom-contact-form .wpcf7-form-control:focus {
+.custom-contact-form .wpcf7-form-control[type=text]:focus,
+.custom-contact-form .wpcf7-form-control[type=email]:focus,
+.custom-contact-form .wpcf7-form-control[type=tel]:focus,
+.custom-contact-form .wpcf7-form-control[type=url]:focus,
+.custom-contact-form select.wpcf7-form-control:focus,
+.custom-contact-form textarea.wpcf7-form-control:focus {
     outline: none;
-    border-color: #007cba;
+    border-color: var(--primary-color);
     background-color: #fff;
     box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
 }
@@ -352,6 +357,10 @@ footer .footer-bottom {
     .custom-contact-form .wpcf7-form-control {
         padding: 10px 12px;
     }
+	.about-nav {
+		border-bottom: 1px solid #e1e1e1 !important;
+		flex-direction: column !important;
+	}
 }
 
 
@@ -409,7 +418,11 @@ footer .footer-top .main-news-letter .wpcf7 .subscribebutton {
         color: #fff;
     }
 }
-
+.wpcf7 form.submitting .subscribebutton,
+.wpcf7 form.submitting .btn-submit{
+	pointer-events: none;
+	opacity: 0.6;
+}
 .main-form.contact-form-wrapper .form-row.row-recapcha-submit {
     display: flex;
     flex-wrap: wrap;
@@ -419,6 +432,15 @@ footer .footer-top .main-news-letter .wpcf7 .subscribebutton {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+@media (max-width: 576px) {
+	.main-form.contact-form-wrapper .form-row .form-submit-btn {
+    display: inline-flex;
+    flex-direction: column-reverse;
+	gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
 }
 header .logo,
 footer .logo {
@@ -1219,17 +1241,19 @@ footer .logo {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid #e1e1e1;
+	}
+	
+	
 }
 
 .about-nav {
     display: flex;
-    gap: 20px;
+    column-gap: 20px;
     overflow-x: auto;
     scrollbar-width: none;
     white-space: nowrap;
     padding: 10px 0;
     flex-direction: row;
-
 }
 
 .about-nav::-webkit-scrollbar {
@@ -1271,7 +1295,34 @@ footer .logo {
     display: block !important;
 }
 
-}
 .om-events-detail .box-great .great-list .great-item .image {
     margin-top: 5px;
+}
+
+.wpcf7-form-control-wrap:has(.wpcf7-select)::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath fill='%23666' d='M297.4 470.6C309.9 483.1 330.2 483.1 342.7 470.6L534.7 278.6C547.2 266.1 547.2 245.8 534.7 233.3C522.2 220.8 501.9 220.8 489.4 233.3L320 402.7L150.6 233.4C138.1 220.9 117.8 220.9 105.3 233.4C92.8 245.9 92.8 266.2 105.3 278.7L297.3 470.7z'/%3E%3C/svg%3E");
+}
+
+.wpcf7-form-control-wrap:has(.wpcf7-select)::after {
+    transition: transform 0.2s ease;
+}
+
+.wpcf7-form-control-wrap:has(.wpcf7-select) select:focus + * {
+}
+
+.wpcf7-form-control-wrap:has(.wpcf7-select):focus-within::after {
+    transform: translateY(-50%) rotate(180deg);
 }

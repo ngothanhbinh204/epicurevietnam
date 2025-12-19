@@ -210,7 +210,7 @@ endif;
             <?php foreach ($sidebar_banners as $banner) :
                 if (empty($banner['banner_image'])) continue;
 
-                $link = $banner['banner_link'] ?? '';
+                $link = $banner['banner_link']['url'] ?? '';
             ?>
             <div class="banner-item">
                 <?php if ($link) : ?>
