@@ -14,28 +14,35 @@ if (!empty($taxonomies)) :
         $tag_taxonomies = ['experiences_tag', 'shopping_tag', 'events_tag', 'vouchers_tag', 'translation_priority'];
         if (in_array($taxonomy->name, $tag_taxonomies)) continue;
         
-        // Get terms for this taxonomy
-        $terms = get_terms(array(
+        // Get all terms for this taxonomy
+        $all_terms = get_terms(array(
             'taxonomy' => $taxonomy->name,
             'hide_empty' => true,
         ));
         
-        if (!empty($terms) && !is_wp_error($terms)) :
+        if (!empty($all_terms) && !is_wp_error($all_terms)) :
             $current_term = get_queried_object();
             $current_term_id = ($current_term && isset($current_term->term_id)) ? $current_term->term_id : 0;
+            
+            // Filter terms: only show terms that don't have children, or are children themselves
+            $display_terms = array();
+            
+            foreach ($all_terms as $term) {
+                // Check if this term has children
+                $children = get_term_children($term->term_id, $taxonomy->name);
+                
+                if (empty($children)) {
+                    // This term has no children - show it
+                    // But only if it's a top-level term OR its parent doesn't exist in our list
+                    // OR if it's a child term (parent > 0)
+                    $display_terms[] = $term;
+                }
+                // If term has children, we skip it (don't display parent)
+            }
+            
+            if (!empty($display_terms)) :
 ?>
 <?php get_template_part('modules/common/breadcrumb'); ?>
-
-<!-- <ul class="about-nav">
-    <?php foreach ($terms as $term) : 
-        $term_link = get_term_link($term);
-        $active_class = ($current_term_id == $term->term_id) ? ' active' : '';
-    ?>
-    <li class="<?= $active_class ?>">
-        <a href="<?= esc_url($term_link) ?>"><?= esc_html($term->name) ?></a>
-    </li>
-    <?php endforeach; ?>
-</ul> -->
 
 <div class="about-nav-container">
 
@@ -50,10 +57,10 @@ if (!empty($taxonomies)) :
     <div class="about-nav-gradient right"></div>
 
     <ul class="about-nav">
-        <?php foreach ($terms as $term) : 
-        $term_link = get_term_link($term);
-        $active_class = ($current_term_id == $term->term_id) ? ' active' : '';
-    ?>
+        <?php foreach ($display_terms as $term) : 
+            $term_link = get_term_link($term);
+            $active_class = ($current_term_id == $term->term_id) ? 'active' : '';
+        ?>
         <li class="<?= $active_class ?>">
             <a href="<?= esc_url($term_link) ?>"><?= esc_html($term->name) ?></a>
         </li>
@@ -70,6 +77,7 @@ if (!empty($taxonomies)) :
 </div>
 
 <?php
+            endif;
         endif;
     endforeach;
 endif;
@@ -78,6 +86,8 @@ endif;
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector(".about-nav-container");
+    if (!container) return;
+    
     const nav = container.querySelector(".about-nav");
     const btnPrev = container.querySelector(".nav-prev");
     const btnNext = container.querySelector(".nav-next");
@@ -96,32 +106,46 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Ẩn/hiện nút
-        btnPrev.style.opacity = nav.scrollLeft <= 0 ? "0.3" : "1";
-        btnNext.style.opacity = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 5 ? "0.3" : "1";
+        if (btnPrev) btnPrev.style.opacity = nav.scrollLeft <= 0 ? "0.3" : "1";
+        if (btnNext) btnNext.style.opacity = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 5 ? "0.3" : "1";
 
         // Gradient
-        gradientLeft.style.opacity = nav.scrollLeft <= 0 ? "0" : "1";
-        gradientRight.style.opacity =
+        if (gradientLeft) gradientLeft.style.opacity = nav.scrollLeft <= 0 ? "0" : "1";
+        if (gradientRight) gradientRight.style.opacity =
             nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 5 ? "0" : "1";
     }
 
     // Nút next/prev
-    btnNext.addEventListener("click", () => {
-        nav.scrollBy({
-            left: 250,
-            behavior: "smooth"
+    if (btnNext) {
+        btnNext.addEventListener("click", () => {
+            nav.scrollBy({
+                left: 250,
+                behavior: "smooth"
+            });
         });
-    });
+    }
 
-    btnPrev.addEventListener("click", () => {
-        nav.scrollBy({
-            left: -250,
-            behavior: "smooth"
+    if (btnPrev) {
+        btnPrev.addEventListener("click", () => {
+            nav.scrollBy({
+                left: -250,
+                behavior: "smooth"
+            });
         });
-    });
+    }
 
     // Cập nhật UI khi scroll
     nav.addEventListener("scroll", checkOverflow);
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    nav.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX - nav.offsetLeft;
+        scrollLeft = nav.scrollLeft;
+    });
 
     nav.addEventListener("mouseleave", () => {
         isDown = false;

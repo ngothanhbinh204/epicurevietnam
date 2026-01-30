@@ -39,10 +39,12 @@ function canhcam_style()
 	if (class_exists('CanhCam_Licsence_Class')) {
 		$my_license = CanhCam_Licsence_Class::init();
 		if (!$my_license->isDateExpiration()) {
-			if (stripos($_SERVER['HTTP_USER_AGENT'], 'Chrome-Lighthouse') === false) {
-				wp_enqueue_script('front-end-global', THEME_URI . '/scripts/core.min.js', '', '', true);
-				wp_enqueue_script('front-end-main', THEME_URI . '/scripts/main.min.js', '', '', true);
-			}
+			// Removed User Agent check for consistent experience across devices/bots
+			$core_ver = file_exists(THEME_DIR . '/scripts/core.min.js') ? filemtime(THEME_DIR . '/scripts/core.min.js') : GENERATE_VERSION;
+			$main_ver = file_exists(THEME_DIR . '/scripts/main.min.js') ? filemtime(THEME_DIR . '/scripts/main.min.js') : GENERATE_VERSION;
+			
+			wp_enqueue_script('front-end-global', THEME_URI . '/scripts/core.min.js', array(), $core_ver, true);
+			wp_enqueue_script('front-end-main', THEME_URI . '/scripts/main.min.js', array(), $main_ver, true);
 		}
 	}
 }

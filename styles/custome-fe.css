@@ -363,7 +363,12 @@ footer .footer-bottom {
 	}
 }
 
-
+.wpcf7-not-valid-tip{
+	font-size: 1rem !important;
+}
+.wpcf7 form.invalid .wpcf7-response-output, .wpcf7 form.unaccepted .wpcf7-response-output, .wpcf7 form.payment-required .wpcf7-response-output {
+	min-width: 48vw;
+}
 footer .footer-top .main-news-letter .subscribe{
     -webkit-box-align: center;
     -ms-flex-align: center;

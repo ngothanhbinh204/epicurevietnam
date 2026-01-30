@@ -178,7 +178,17 @@ function handle_posts_without_category($query) {
             }
             
             // Not a category, check if it's a post
-            $post = get_page_by_path($slug, OBJECT, $config['post_type']);
+            $cache_key = 'fallback_check_' . $config['post_type'] . '_' . $slug;
+            $post_id = wp_cache_get($cache_key, 'theme_rewrite_rules');
+            
+            if ($post_id === false) {
+                $found_post = get_page_by_path($slug, OBJECT, $config['post_type']);
+                $post_id = $found_post ? $found_post->ID : 0;
+                wp_cache_set($cache_key, $post_id, 'theme_rewrite_rules', 3600);
+            }
+            
+            $post = ($post_id > 0) ? get_post($post_id) : null;
+
             if ($post) {
                 // It's a post without category, modify the query
                 $query->set('post_type', $config['post_type']);
@@ -262,17 +272,17 @@ add_action('wp_loaded', function() {
 });
 
 // Redirect old plural slugs to singular
-function redirect_old_plural_slugs() {
-    $request_uri = $_SERVER['REQUEST_URI'];
+// function redirect_old_plural_slugs() {
+//     $request_uri = $_SERVER['REQUEST_URI'];
     
-    // Check for experiences -> experience
-    if (strpos($request_uri, '/experiences/') === 0) {
-        $new_uri = str_replace('/experiences/', '/experience/', $request_uri);
-        wp_redirect(home_url($new_uri), 301);
-        exit;
-    }
-}
-add_action('template_redirect', 'redirect_old_plural_slugs');
+//     // Check for experiences -> experience
+//     if (strpos($request_uri, '/experiences/') === 0) {
+//         $new_uri = str_replace('/experiences/', '/experience/', $request_uri);
+//         wp_redirect(home_url($new_uri), 301);
+//         exit;
+//     }
+// }
+// add_action('template_redirect', 'redirect_old_plural_slugs');
 
 // Enqueue lazy loading script
 function enqueue_lazyload_script() {
@@ -301,13 +311,19 @@ function redirect_archives_to_pages() {
         }
 
         // Find page with this archive_post_type
-        $pages = get_posts(array(
-            'post_type' => 'page',
-            'meta_key' => 'archive_post_type',
-            'meta_value' => $post_type,
-            'posts_per_page' => 1,
-            'fields' => 'ids'
-        ));
+        $cache_key = 'archive_redirect_' . $post_type;
+        $pages = wp_cache_get($cache_key, 'theme_redirects');
+
+        if ($pages === false) {
+            $pages = get_posts(array(
+                'post_type' => 'page',
+                'meta_key' => 'archive_post_type',
+                'meta_value' => $post_type,
+                'posts_per_page' => 1,
+                'fields' => 'ids'
+            ));
+            wp_cache_set($cache_key, $pages, 'theme_redirects', 86400); // Cache for 24 hours
+        }
         
         if (!empty($pages)) {
             wp_redirect(get_permalink($pages[0]), 301);
@@ -346,3 +362,29 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
     }
     return $crumbs;
 }, 10, 2);
+
+
+function is_video_file($url) {
+	if (!$url) return false;
+
+	$ext = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+	return in_array($ext, ['mp4', 'webm', 'ogg'], true);
+}
+
+function get_youtube_id($url) {
+	if (!$url) return false;
+
+	$patterns = [
+		'~youtu\.be/([^\?&]+)~',
+		'~youtube\.com/watch\?v=([^\?&]+)~',
+		'~youtube\.com/embed/([^\?&]+)~',
+	];
+
+	foreach ($patterns as $pattern) {
+		if (preg_match($pattern, $url, $matches)) {
+			return $matches[1];
+		}
+	}
+
+	return false;
+}

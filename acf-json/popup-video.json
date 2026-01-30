@@ -1,0 +1,108 @@
+[
+    {
+        "key": "group_popup_video",
+        "title": "Popup Video",
+        "fields": [
+            {
+                "key": "field_popup_video_enable",
+                "label": "Enable Popup Video",
+                "name": "popup_video_enable",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "default_value": 0,
+                "ui": 1
+            },
+            {
+                "key": "field_popup_video_link",
+                "label": "Popup Link",
+                "name": "popup_video_link",
+                "type": "link",
+                "instructions": "Link khi click video",
+                "required": 0,
+                "return_format": "array"
+            },
+            {
+                "key": "field_popup_video_poster",
+                "label": "Video Poster",
+                "name": "popup_video_poster",
+                "type": "image",
+                "instructions": "Poster image for video (optional)",
+                "required": 0,
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_popup_video_source",
+                "label": "Video Source Type",
+                "name": "popup_video_source",
+                "type": "radio",
+                "instructions": "",
+                "required": 1,
+                "choices": {
+                    "file": "Upload MP4",
+                    "url": "External Video URL"
+                },
+                "default_value": "file",
+                "layout": "horizontal",
+                "return_format": "value"
+            },
+            {
+                "key": "field_popup_video_file",
+                "label": "Video File (MP4)",
+                "name": "popup_video_file",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_popup_video_source",
+                            "operator": "==",
+                            "value": "file"
+                        }
+                    ]
+                ],
+                "return_format": "url",
+                "library": "all",
+                "mime_types": "mp4"
+            },
+            {
+                "key": "field_popup_video_url",
+                "label": "Video URL",
+                "name": "popup_video_url",
+                "type": "url",
+                "instructions": "Paste video URL (mp4 / CDN)",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_popup_video_source",
+                            "operator": "==",
+                            "value": "url"
+                        }
+                    ]
+                ],
+                "default_value": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "acf-options"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [],
+        "active": true,
+        "description": ""
+    }
+]

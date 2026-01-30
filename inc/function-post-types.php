@@ -13,7 +13,8 @@ create_post_type('experiences', [
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
-		'slug' => 'experiences',
+		// 'slug' => 'experiences',
+		'slug' => 'experience',
 		'with_front' => false
 	],
 	'description' => 'Manage experiences and activities'
