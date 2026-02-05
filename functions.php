@@ -6,208 +6,47 @@ require get_template_directory() . '/inc/function-field.php';
 require get_template_directory() . '/inc/function-post-types.php';
 require get_template_directory() . '/inc/function-cpt-fields.php';
 require get_template_directory() . '/inc/function-pagination.php';
+require get_template_directory() . '/inc/function-pagination-canhcanh.php';
 require get_template_directory() . '/inc/function-setup.php';
 require get_template_directory() . '/inc/function-menu-walker.php';
 
 // WPML Support Functions
 require get_template_directory() . '/inc/function-wpml.php';
-
-// Fix rewrite rules for custom post type taxonomies
-function flush_rewrite_rules_on_activation() {
-    flush_rewrite_rules();
-}
-add_action('after_switch_theme', 'flush_rewrite_rules_on_activation');
-
-// Custom URL structure for all custom post types
-function custom_post_types_rewrite_rules() {
-    // Shopping rules - with category
+// Custom Rewrite Rule for Single Posts with Category (e.g. /experience/culture/my-post)
+add_action('init', function() {
+    // 1. Experiences
     add_rewrite_rule(
+        '^experience/([^/]+)/([^/]+)/?$',
+        'index.php?experiences=$matches[2]', // Matches post_name
+        'top'
+    );
+     // 2. Shopping
+     add_rewrite_rule(
         '^shopping/([^/]+)/([^/]+)/?$',
         'index.php?shopping=$matches[2]',
         'top'
     );
-    // Shopping rules - category archive with pagination
-    add_rewrite_rule(
-        '^shopping/([^/]+)/page/([0-9]+)/?$',
-        'index.php?shopping_category=$matches[1]&shopping_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Shopping rules - category archive OR post without category
-    add_rewrite_rule(
-        '^shopping/([^/]+)/?$',
-        'index.php?shopping_category=$matches[1]&shopping_fallback=$matches[1]',
-        'top'
-    );
-    
-    // Experiences rules - with category
-    add_rewrite_rule(
-        '^experience/([^/]+)/([^/]+)/?$',
-        'index.php?experiences=$matches[2]',
-        'top'
-    );
-    // Experiences rules - category archive with pagination
-    add_rewrite_rule(
-        '^experience/([^/]+)/page/([0-9]+)/?$',
-        'index.php?experiences_category=$matches[1]&experiences_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Experiences rules - category archive OR post without category
-    add_rewrite_rule(
-        '^experience/([^/]+)/?$',
-        'index.php?experiences_category=$matches[1]&experiences_fallback=$matches[1]',
-        'top'
-    );
-    
-    // Events rules - with category
+    // 3. Events
     add_rewrite_rule(
         '^events/([^/]+)/([^/]+)/?$',
         'index.php?events=$matches[2]',
         'top'
     );
-    // Events rules - category archive with pagination
-    add_rewrite_rule(
-        '^events/([^/]+)/page/([0-9]+)/?$',
-        'index.php?events_category=$matches[1]&events_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Events rules - category archive OR post without category
-    add_rewrite_rule(
-        '^events/([^/]+)/?$',
-        'index.php?events_category=$matches[1]&events_fallback=$matches[1]',
-        'top'
-    );
-    
-    // Vouchers rules - with category
+    // 4. Vouchers
     add_rewrite_rule(
         '^vouchers/([^/]+)/([^/]+)/?$',
         'index.php?vouchers=$matches[2]',
         'top'
     );
-    // Vouchers rules - category archive with pagination
-    add_rewrite_rule(
-        '^vouchers/([^/]+)/page/([0-9]+)/?$',
-        'index.php?vouchers_category=$matches[1]&vouchers_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Vouchers rules - category archive OR post without category
-    add_rewrite_rule(
-        '^vouchers/([^/]+)/?$',
-        'index.php?vouchers_category=$matches[1]&vouchers_fallback=$matches[1]',
-        'top'
-    );
-    
-    // Video rules (new URL: videos) - with category
-    add_rewrite_rule(
-        '^videos/([^/]+)/([^/]+)/?$',
-        'index.php?video=$matches[2]',
-        'top'
-    );
-    // Video rules (new URL: videos) - category archive with pagination
-    add_rewrite_rule(
-        '^videos/([^/]+)/page/([0-9]+)/?$',
-        'index.php?video_category=$matches[1]&video_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Video rules - category archive OR post without category
-    add_rewrite_rule(
-        '^videos/([^/]+)/?$',
-        'index.php?video_category=$matches[1]&video_fallback=$matches[1]',
-        'top'
-    );
-    
-    // Video rules (old URL: video - backward compatibility) - with category
-    add_rewrite_rule(
-        '^video/([^/]+)/([^/]+)/?$',
-        'index.php?video=$matches[2]',
-        'top'
-    );
-    // Video rules (old URL: video) - category archive with pagination
-    add_rewrite_rule(
-        '^video/([^/]+)/page/([0-9]+)/?$',
-        'index.php?video_category=$matches[1]&video_fallback=$matches[1]&paged=$matches[2]',
-        'top'
-    );
-    // Video rules (old URL) - category archive OR post without category
-    add_rewrite_rule(
-        '^video/([^/]+)/?$',
-        'index.php?video_category=$matches[1]&video_fallback=$matches[1]',
-        'top'
-    );
-}
-add_action('init', 'custom_post_types_rewrite_rules');
+    // 5. Video (Already handled by CPT 'videos' vs tax 'video', but if user wants video/cat/post...)
+    // Current CPT slug is 'videos', Tax slug is 'video'.
+    // If we want /video/cat/post -> rewrite CPT slug to 'video' or add rule.
+    // User requested tax url: /experience/other (Singular).
+    // Assuming user wants consistent singular base.
+});
 
-// Add query vars for all custom taxonomies
-function custom_post_types_query_vars($vars) {
-    $vars[] = 'shopping_category';
-    $vars[] = 'experiences_category';
-    $vars[] = 'events_category';
-    $vars[] = 'vouchers_category';
-    $vars[] = 'video_category';
-    // Fallback vars for posts without category
-    $vars[] = 'shopping_fallback';
-    $vars[] = 'experiences_fallback';
-    $vars[] = 'events_fallback';
-    $vars[] = 'vouchers_fallback';
-    $vars[] = 'video_fallback';
-    return $vars;
-}
-add_filter('query_vars', 'custom_post_types_query_vars');
 
-// Handle posts without category - check if slug is a post or a category
-function handle_posts_without_category($query) {
-    if (is_admin() || !$query->is_main_query()) {
-        return;
-    }
-    
-    $fallback_mappings = [
-        'video_fallback' => ['post_type' => 'video', 'taxonomy' => 'video_category', 'category_var' => 'video_category'],
-        'shopping_fallback' => ['post_type' => 'shopping', 'taxonomy' => 'shopping_category', 'category_var' => 'shopping_category'],
-        'experiences_fallback' => ['post_type' => 'experiences', 'taxonomy' => 'experiences_category', 'category_var' => 'experiences_category'],
-        'events_fallback' => ['post_type' => 'events', 'taxonomy' => 'events_category', 'category_var' => 'events_category'],
-        'vouchers_fallback' => ['post_type' => 'vouchers', 'taxonomy' => 'vouchers_category', 'category_var' => 'vouchers_category'],
-    ];
-    
-    foreach ($fallback_mappings as $fallback_var => $config) {
-        $slug = get_query_var($fallback_var);
-        if (!empty($slug)) {
-            // First check if it's a valid category
-            $term = get_term_by('slug', $slug, $config['taxonomy']);
-            if ($term && !is_wp_error($term)) {
-                // It's a category, keep the taxonomy query
-                return;
-            }
-            
-            // Not a category, check if it's a post
-            $cache_key = 'fallback_check_' . $config['post_type'] . '_' . $slug;
-            $post_id = wp_cache_get($cache_key, 'theme_rewrite_rules');
-            
-            if ($post_id === false) {
-                $found_post = get_page_by_path($slug, OBJECT, $config['post_type']);
-                $post_id = $found_post ? $found_post->ID : 0;
-                wp_cache_set($cache_key, $post_id, 'theme_rewrite_rules', 3600);
-            }
-            
-            $post = ($post_id > 0) ? get_post($post_id) : null;
-
-            if ($post) {
-                // It's a post without category, modify the query
-                $query->set('post_type', $config['post_type']);
-                $query->set('name', $slug);
-                $query->set($config['post_type'], $slug);
-                // Clear the taxonomy query
-                $query->set($config['category_var'], '');
-                $query->is_single = true;
-                $query->is_singular = true;
-                $query->is_tax = false;
-                $query->is_archive = false;
-            }
-            break;
-        }
-    }
-}
-add_action('pre_get_posts', 'handle_posts_without_category');
-
-// Filter post links for all custom post types
+// Filter post links to include category (Hierarchy)
 function custom_post_types_post_link($post_link, $post) {
     if (!is_object($post)) return $post_link;
     
@@ -216,73 +55,40 @@ function custom_post_types_post_link($post_link, $post) {
         'experiences' => 'experiences_category',
         'events' => 'events_category',
         'vouchers' => 'vouchers_category',
-        'video' => 'video_category'
+        // 'video' => 'video_category' // Video seems to use 'videos' base vs 'video' tax, might stay separate.
     ];
     
     if (isset($post_type_taxonomies[$post->post_type])) {
         $taxonomy = $post_type_taxonomies[$post->post_type];
         $terms = wp_get_object_terms($post->ID, $taxonomy);
         
-        // Use 'videos' for video post type, 'experience' for experiences, otherwise use post_type slug
+        // Convert 'experiences' -> 'experience' to match the rewrites
         $url_slug = $post->post_type;
-        if ($post->post_type === 'video') {
-            $url_slug = 'videos';
-        } elseif ($post->post_type === 'experiences') {
-            $url_slug = 'experience';
-        }
+        if ($post->post_type === 'experiences') $url_slug = 'experience';
         
+        // If post has terms, inject the first term slug
         if ($terms && !is_wp_error($terms) && !empty($terms)) {
-            // Post has category - use /post-type/category/post-name/
+            // New structure: /experience/category-slug/post-slug/
             return home_url('/' . $url_slug . '/' . $terms[0]->slug . '/' . $post->post_name . '/');
-        } else {
-            // Post has NO category - use /post-type/post-name/
-            return home_url('/' . $url_slug . '/' . $post->post_name . '/');
-        }
+        } 
+        
+        // If no terms, stick to default? 
+        // Default CPT rewrite for 'experiences' is /experience/post-slug
+        // This causes conflict with /experience/cat-slug.
+        // We really prefer posts to ALWAYS be deep if possible, or we rely on partial match priority.
     }
     
     return $post_link;
 }
 add_filter('post_type_link', 'custom_post_types_post_link', 1, 2);
 
-// Filter term links for all custom taxonomies
-function custom_post_types_term_link($termlink, $term) {
-    $taxonomy_post_types = [
-        'shopping_category' => 'shopping',
-        'experiences_category' => 'experience',
-        'events_category' => 'events',
-        'vouchers_category' => 'vouchers',
-        'video_category' => 'videos'
-    ];
-    
-    if (isset($taxonomy_post_types[$term->taxonomy])) {
-        $post_type = $taxonomy_post_types[$term->taxonomy];
-        return home_url('/' . $post_type . '/' . $term->slug . '/');
-    }
-    
-    return $termlink;
-}
-add_filter('term_link', 'custom_post_types_term_link', 10, 2);
-
 // Flush rewrite rules once to apply changes
 add_action('wp_loaded', function() {
-    if (!get_option('custom_post_types_rewrite_rules_flushed_v6') || isset($_GET['flush_rules'])) {
+    if (!get_option('custom_post_types_rewrite_rules_flushed_v9') || isset($_GET['flush_rules'])) {
         flush_rewrite_rules();
-        update_option('custom_post_types_rewrite_rules_flushed_v6', true);
+        update_option('custom_post_types_rewrite_rules_flushed_v9', true);
     }
 });
-
-// Redirect old plural slugs to singular
-// function redirect_old_plural_slugs() {
-//     $request_uri = $_SERVER['REQUEST_URI'];
-    
-//     // Check for experiences -> experience
-//     if (strpos($request_uri, '/experiences/') === 0) {
-//         $new_uri = str_replace('/experiences/', '/experience/', $request_uri);
-//         wp_redirect(home_url($new_uri), 301);
-//         exit;
-//     }
-// }
-// add_action('template_redirect', 'redirect_old_plural_slugs');
 
 // Enqueue lazy loading script
 function enqueue_lazyload_script() {
@@ -295,73 +101,6 @@ function enqueue_lazyload_script() {
     );
 }
 add_action('wp_enqueue_scripts', 'enqueue_lazyload_script');
-
-// Redirect archives to pages
-function redirect_archives_to_pages() {
-    if (is_post_type_archive()) {
-        $post_type = get_query_var('post_type');
-        if (is_array($post_type)) {
-            $post_type = reset($post_type);
-        }
-        
-        // Only redirect for our specific post types
-        $target_post_types = ['shopping', 'experiences', 'events', 'vouchers', 'video'];
-        if (!in_array($post_type, $target_post_types)) {
-            return;
-        }
-
-        // Find page with this archive_post_type
-        $cache_key = 'archive_redirect_' . $post_type;
-        $pages = wp_cache_get($cache_key, 'theme_redirects');
-
-        if ($pages === false) {
-            $pages = get_posts(array(
-                'post_type' => 'page',
-                'meta_key' => 'archive_post_type',
-                'meta_value' => $post_type,
-                'posts_per_page' => 1,
-                'fields' => 'ids'
-            ));
-            wp_cache_set($cache_key, $pages, 'theme_redirects', 86400); // Cache for 24 hours
-        }
-        
-        if (!empty($pages)) {
-            wp_redirect(get_permalink($pages[0]), 301);
-            exit;
-        }
-    }
-}
-add_action('template_redirect', 'redirect_archives_to_pages');
-
-// Filter Rank Math Breadcrumbs to use Singular Name for Post Type Archives
-add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
-    $target_post_types = ['experiences', 'events', 'vouchers', 'shopping', 'video'];
-    
-    // Determine current post type
-    $post_type = get_post_type();
-    if (!$post_type && is_tax()) {
-        $term = get_queried_object();
-        if ($term && isset($term->taxonomy)) {
-            $taxonomy = get_taxonomy($term->taxonomy);
-            if ($taxonomy && !empty($taxonomy->object_type)) {
-                $post_type = $taxonomy->object_type[0];
-            }
-        }
-    }
-
-    if ($post_type && in_array($post_type, $target_post_types)) {
-        $pt_obj = get_post_type_object($post_type);
-        if ($pt_obj) {
-            foreach ($crumbs as $key => $crumb) {
-                // If the crumb label matches the Plural Name, change it to Singular Name
-                if ($crumb[0] === $pt_obj->labels->name) {
-                    $crumbs[$key][0] = $pt_obj->labels->singular_name;
-                }
-            }
-        }
-    }
-    return $crumbs;
-}, 10, 2);
 
 
 function is_video_file($url) {

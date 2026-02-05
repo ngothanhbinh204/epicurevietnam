@@ -186,15 +186,8 @@ endif;
         </div>
 
         <?php
-        if (function_exists('custom_pagination')) {
-            if ($custom_query) {
-                $temp_query = $GLOBALS['wp_query'];
-                $GLOBALS['wp_query'] = $custom_query;
-                custom_pagination();
-                $GLOBALS['wp_query'] = $temp_query;
-            } else {
-                custom_pagination();
-            }
+        if (function_exists('canhcam_pagination')) {
+            canhcam_pagination($query);
         }
         ?>
     </div>

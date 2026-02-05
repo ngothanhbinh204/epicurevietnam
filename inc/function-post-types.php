@@ -9,12 +9,12 @@ create_post_type('experiences', [
 	'icon' => 'dashicons-star-filled',
 	'menu_position' => 5,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author', 'page-attributes'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
 		// 'slug' => 'experiences',
-		'slug' => 'experience',
+		'slug' => 'experiences-item',
 		'with_front' => false
 	],
 	'description' => 'Manage experiences and activities'
@@ -26,7 +26,7 @@ create_taxonomy('experiences_category', [
 	'slug' => 'experiences-category',
 	'hierarchical' => true,
 	'show_in_rest' => true,
-	'rewrite' => false, // Disable default rewrite, we'll handle it custom
+	'rewrite' => ['slug' => 'experience', 'with_front' => false, 'hierarchical' => true],
 	'description' => 'Categorize experiences by region and theme'
 ]);
 
@@ -48,7 +48,7 @@ create_post_type('video', [
 	'icon' => 'dashicons-video-alt3',
 	'menu_position' => 6,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
@@ -66,7 +66,7 @@ create_taxonomy('video_category', [
 	'slug' => 'video-category',
 	'hierarchical' => true,
 	'show_in_rest' => true,
-	'rewrite' => false, 
+	'rewrite' => ['slug' => 'video', 'with_front' => false, 'hierarchical' => true],
 	'description' => 'Categorize videos by type'
 ]);
 
@@ -79,11 +79,11 @@ create_post_type('shopping', [
 	'icon' => 'dashicons-cart',
 	'menu_position' => 7,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
-		'slug' => 'shopping',
+		'slug' => 'shopping-item',
 		'with_front' => false
 	],
 	'description' => 'Manage shopping Shopping Item'
@@ -96,7 +96,7 @@ create_taxonomy('shopping_category', [
 	'slug' => 'shopping-category',
 	'hierarchical' => true,
 	'show_in_rest' => true,
-	'rewrite' => false, // Disable default rewrite, we'll handle it custom
+	'rewrite' => ['slug' => 'shopping', 'with_front' => false, 'hierarchical' => true],
 	'description' => 'Categorize shopping Shopping Item'
 ]);
 
@@ -108,11 +108,11 @@ create_post_type('events', [
 	'icon' => 'dashicons-calendar-alt',
 	'menu_position' => 8,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
-		'slug' => 'events',
+		'slug' => 'events-item',
 		'with_front' => false
 	],
 	'description' => 'Manage events and activities'
@@ -125,7 +125,7 @@ create_taxonomy('events_category', [
 	'slug' => 'events-category',
 	'hierarchical' => true,
 	'show_in_rest' => true,
-	'rewrite' => false, // Disable default rewrite, we'll handle it custom
+	'rewrite' => ['slug' => 'events', 'with_front' => false, 'hierarchical' => true],
 	'description' => 'Categorize events by type'
 ]);
 
@@ -137,11 +137,11 @@ create_post_type('vouchers', [
 	'icon' => 'dashicons-tickets-alt',
 	'menu_position' => 9,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [
-		'slug' => 'vouchers',
+		'slug' => 'vouchers-item',
 		'with_front' => false
 	],
 	'description' => 'Quản lý vouchers và khuyến mãi'
@@ -154,7 +154,7 @@ create_taxonomy('vouchers_category', [
 	'slug' => 'vouchers-category',
 	'hierarchical' => true,
 	'show_in_rest' => true,
-	'rewrite' => false, // Disable default rewrite, we'll handle it custom
+	'rewrite' => ['slug' => 'vouchers', 'with_front' => false, 'hierarchical' => true],
 	'description' => 'Categorize vouchers by type'
 ]);
 
@@ -166,7 +166,7 @@ create_post_type('product', [
 	'icon' => 'dashicons-products',
 	'menu_position' => 10,
 	'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
-	'has_archive' => true,
+	'has_archive' => false,
 	'publicly_queryable' => true,
 	'show_in_rest' => true,
 	'rewrite' => [

@@ -1,6 +1,6 @@
 <?php
 /**
- * Taxonomy template for Video Category
+ * Taxonomy Template: Video Category
  */
 get_header();
 ?>
@@ -9,9 +9,16 @@ get_header();
 
 <?php get_template_part('modules/common/banner'); ?>
 
-<section class="om-whaton main-section">
+<section class="om-video main-section">
     <div class="container">
-        <?php get_template_part('modules/archive/archive-nav'); ?>
+        <?php 
+        // Force 'video' post type for nav
+        set_query_var('archive_post_type', 'video');
+        get_template_part('modules/archive/archive-nav'); 
+        
+        // Use global query for taxonomy
+        set_query_var('custom_query', $GLOBALS['wp_query']);
+        ?>
         <?php get_template_part('modules/archive/video-content'); ?>
     </div>
 </section>
